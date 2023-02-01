@@ -1,8 +1,8 @@
 {
-  "name": "next-firebase-starter",
+  "name": "baby-got-slack",
   "private": true,
   "version": "1.0.0",
-  "author": "Trinity Christiana",
+  "author": "Team 1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
