@@ -1,0 +1,20 @@
+{
+  "-NN9banGwi4AO06ftR1x": {
+    "firebaseKey": "-NN9banGwi4AO06ftR1x",
+    "name": "Charles",
+    "image": "http://dummyimage.com/162x100.png/cc0000/ffffff",
+    "location": "La Libertad"
+  },
+  "-NN9banILbDVI0Jxdm-P": {
+    "firebaseKey": "-NN9banILbDVI0Jxdm-P",
+    "name": "Danny",
+    "image": "http://dummyimage.com/112x100.png/cc0000/ffffff",
+    "location": "Meshcherino"
+  },
+  "-NN9banJFTOsG-1kWBUD": {
+    "firebaseKey": "-NN9banJFTOsG-1kWBUD",
+    "name": "Van",
+    "image": "http://dummyimage.com/162x100.png/ff4444/ffffff",
+    "location": "Vilarinho das Cambas"
+  }
+}
