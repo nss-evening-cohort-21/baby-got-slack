@@ -19,7 +19,7 @@ function MainPage() {
 
   return (
     <div className="text-center my-4">
-      <div className="d-flex flex-wrap">
+      <div>
         {messages.map((message) => (
           <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
         ))}
