@@ -40,3 +40,7 @@ body {
   justify-content: center;
   height: 60px;
 }
+
+.container {
+  margin-left: 250px;
+}
