@@ -1,6 +1,6 @@
-import clientCredentials from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
-const endpoint = clientCredentials.databaseUrl;
+const endpoint = clientCredentials.databaseURL;
 
 const getChannels = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/channels.json`, {
@@ -33,7 +33,7 @@ const getSingleChannel = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const createChannel = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/channels/.json`, {
+  fetch(`${endpoint}/channels.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
