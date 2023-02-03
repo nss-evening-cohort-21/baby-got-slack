@@ -1,6 +1,6 @@
 import { clientCredentials } from '../utils/client';
 
-const endpoint = clientCredentials.databaseUrl;
+const endpoint = clientCredentials.databaseURL;
 
 const getDummyMembers = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/dummyMembers.json`, {
