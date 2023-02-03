@@ -9,8 +9,8 @@ function Sidebar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="flex-column">
           <NavDropdown title="Channels" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.1">Browse channels</NavDropdown.Item>
+            <NavDropdown.Item href="/channel/new">Create a channel</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>

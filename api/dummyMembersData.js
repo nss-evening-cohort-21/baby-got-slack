@@ -1,4 +1,4 @@
-import clientCredentials from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseUrl;
 
