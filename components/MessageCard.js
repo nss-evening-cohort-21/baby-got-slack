@@ -15,6 +15,7 @@ function MessageCard({ messageObj }) {
 
 MessageCard.propTypes = {
   messageObj: PropTypes.shape({
+    channel_id: PropTypes.string,
     timestamp: PropTypes.string,
     message: PropTypes.string,
     firebaseKey: PropTypes.string,
