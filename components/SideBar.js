@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
@@ -15,6 +16,9 @@ function Sidebar() {
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
           </NavDropdown>
+          <Link passHref href="/messages/new">
+            <Nav.Link>New Message</Nav.Link>
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

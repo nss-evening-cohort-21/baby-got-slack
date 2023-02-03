@@ -14,8 +14,6 @@ function Home() {
       }}
     >
       <h1>Hello {user.displayName}! </h1>
-      <p>Click the button below to logout!</p>
-
     </div>
   );
 }

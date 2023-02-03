@@ -1,6 +1,6 @@
-import clientCredentials from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
-const endpoint = clientCredentials.databaseUrl;
+const endpoint = clientCredentials.databaseURL;
 
 const getMessages = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/messages.json?orderBy="uid"&equalTo"${uid}"`, {
@@ -33,7 +33,7 @@ const getSingleMessage = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const createMessage = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/messages/.json`, {
+  fetch(`${endpoint}/messages.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
