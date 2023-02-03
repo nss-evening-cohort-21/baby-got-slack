@@ -1,16 +1,37 @@
 import React from 'react';
 import { Card } from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+import { deleteChannel } from '../api/channelsData';
 
-export default function ChannelCard() {
+function ChannelCard({ channelObj, onUpdate }) {
+  const deleteThisChannel = () => {
+    if (window.confirm(`Delete ${channelObj.name}?`)) {
+      deleteChannel(channelObj.firebaseKey).then(() => onUpdate());
+    }
+  };
   return (
     <Card>
-      <Card.Header>Featured</Card.Header>
+      <Card.Header>#{channelObj.name}</Card.Header>
       <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>With supporting text below as a natural lead-in to additional content.</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Title>{channelObj.starred}</Card.Title>
+        <Card.Text>{channelObj.description}</Card.Text>
+        <Button variant="danger" onClick={deleteThisChannel} className="m-2">
+          DELETE
+        </Button>
       </Card.Body>
     </Card>
   );
 }
+
+ChannelCard.propTypes = {
+  channelObj: PropTypes.shape({
+    name: PropTypes.string,
+    firebaseKey: PropTypes.string,
+    starred: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
+};
+
+export default ChannelCard;
