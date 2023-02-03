@@ -1,21 +1,33 @@
+import React, { useEffect, useState } from 'react';
+import { getMessages } from '../api/messagesData';
 import { useAuth } from '../utils/context/authContext';
+import MessageCard from '../components/MessageCard';
 
-function Home() {
+function MainPage() {
+  const [messages, setMessages] = useState([]);
+
   const { user } = useAuth();
 
+  const getAllTheMessages = () => {
+    getMessages(user.uid).then(setMessages);
+  };
+
+  useEffect(() => {
+    getAllTheMessages();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
+
+    <div className="text-center my-4">
+      <div className="d-flex flex-wrap">
+        {messages.map((message) => (
+          <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
+        ))}
+      </div>
+
     </div>
   );
 }
 
-export default Home;
+export default MainPage;
