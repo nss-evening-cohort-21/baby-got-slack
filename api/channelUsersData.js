@@ -1,6 +1,6 @@
-import clientCredentials from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
-const endpoint = clientCredentials.databaseUrl;
+const endpoint = clientCredentials.databaseURL;
 
 const getChannelUsers = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/channelUsers.json`, {
