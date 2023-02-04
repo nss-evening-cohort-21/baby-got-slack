@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import {
@@ -6,6 +6,7 @@ import {
 } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createMessage, updateMessage } from '../../api/messagesData';
+import { getChannels } from '../../api/channelsData';
 
 const initialState = {
   message: '',
@@ -13,7 +14,7 @@ const initialState = {
 
 export default function MessageForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  // const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
   const time = new Date().toLocaleString('en-US', {
@@ -23,6 +24,11 @@ export default function MessageForm({ obj }) {
     hour: 'numeric',
     minute: '2-digit',
   });
+
+  useEffect(() => {
+    getChannels().then(setChannels);
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,6 +68,29 @@ export default function MessageForm({ obj }) {
           />
         </FloatingLabel>
 
+        <FloatingLabel label="Channel" controlId="channel_id">
+          <Form.Select
+            aria-label="Channel Id"
+            name="channel_id"
+            onChange={handleChange}
+            className="mb-3"
+            value={obj.channel_id}
+            required
+          >
+            <option value="">Select A Channel</option>
+            {
+            channels.map((channel) => (
+              <option
+                key={channel.firebaseKey}
+                value={channel.firebaseKey}
+              >
+                {channel.name}
+              </option>
+            ))
+          }
+          </Form.Select>
+        </FloatingLabel>
+
         <Button variant="primary" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Message
         </Button>
       </Stack>
@@ -71,10 +100,8 @@ export default function MessageForm({ obj }) {
 
 MessageForm.propTypes = {
   obj: PropTypes.shape({
-    name: PropTypes.string,
     message: PropTypes.string,
     channel_id: PropTypes.string,
-    timestamp: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };

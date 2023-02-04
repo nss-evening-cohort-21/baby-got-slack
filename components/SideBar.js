@@ -1,15 +1,22 @@
 import Link from 'next/link';
-import React from 'react';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Nav, Navbar, Button } from 'react-bootstrap';
+import { getChannels } from '../api/channelsData';
 import ChannelForm from './forms/ChannelForm';
 
 function Sidebar() {
-  const users = [
-    { id: 1, name: 'Channel 1' },
-    { id: 2, name: 'Channel 2' },
-    { id: 3, name: 'Channel 3' },
-    { id: 4, name: 'Channel 4' },
-  ];
+  const [channels, setChannels] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    getChannels()
+      .then((data) => setChannels(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleShow = () => {
+    setShowForm(!showForm);
+  };
 
   return (
     <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg">
@@ -21,19 +28,33 @@ function Sidebar() {
           Icon
         </Link>
       </div>
-      <Navbar.Toggle style={{ fontSize: '20px', color: '#959CA4' }} aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse style={{ fontSize: '20px', color: '#959CA4' }} id="basic-navbar-nav">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="flex-column">
-          <NavDropdown style={{ fontSize: '20px', color: '#959CA4' }} title="Channels" id="basic-nav-dropdown">
-            {users.map((user) => (
-              <NavDropdown.Item key={user.id} href={`#action/${user.id}`}>
-                # {user.name}
-              </NavDropdown.Item>
-            ))}
-          </NavDropdown>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div>Channels</div>
+            <Button
+              type="button"
+              onClick={handleShow}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                marginLeft: '5px',
+                fontSize: '20px',
+                color: '#959CA4',
+                cursor: 'pointer',
+              }}
+            >
+              +
+            </Button>
+          </div>
+          {channels.map((channel) => (
+            <Link key={channel.id} passHref href={`#action/${channel.id}`}>
+              <Nav.Link># {channel.name}</Nav.Link>
+            </Link>
+          ))}
 
           <ChannelForm />
-
           <Link passHref href="/messages/new">
             <Nav.Link>New Message</Nav.Link>
           </Link>
