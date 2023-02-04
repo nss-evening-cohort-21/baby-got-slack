@@ -8,11 +8,13 @@ function Sidebar() {
   const [channels, setChannels] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
+  const getAllChannels = () => {
+    getChannels().then(setChannels);
+  };
+
   useEffect(() => {
-    getChannels()
-      .then((data) => setChannels(data))
-      .catch((error) => console.error(error));
-  }, []);
+    getAllChannels();
+  }, [channels]);
 
   const handleShow = () => {
     setShowForm(!showForm);
@@ -49,12 +51,12 @@ function Sidebar() {
             </Button>
           </div>
           {channels.map((channel) => (
-            <Link key={channel.id} passHref href={`#action/${channel.id}`}>
+            <Link key={channel.id} passHref href={`channel/${channel.firebaseKey}`}>
               <Nav.Link># {channel.name}</Nav.Link>
             </Link>
           ))}
 
-          <ChannelForm />
+          <ChannelForm onUpdate={getAllChannels} />
           <Link passHref href="/messages/new">
             <Nav.Link>New Message</Nav.Link>
           </Link>
