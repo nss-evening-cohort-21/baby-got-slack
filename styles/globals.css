@@ -19,9 +19,13 @@ a {
 
 body {
 <<<<<<< HEAD
+<<<<<<< HEAD
   background-color: #712f8f;
 =======
   background-color: #1d9555;
+=======
+  background-color: #F8F8F8;
+>>>>>>> main
 }
 
 .navbar {
@@ -29,7 +33,11 @@ body {
 }
 
 .navbar a {
+<<<<<<< HEAD
   color: wheat;
+>>>>>>> main
+=======
+  color: #959CA4;
 >>>>>>> main
 }
 
@@ -55,7 +63,7 @@ body {
 }
 
 .navbar .dropdown-menu {
-  background-color: rgb(44, 138, 102);
+  background-color: #959CA4;
 }
 
 .brand {
