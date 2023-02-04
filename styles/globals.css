@@ -22,11 +22,12 @@ body {
 }
 
 .navbar {
-  background-color: #4B154B;
+  background-color: #7d2b61;
+  display: flex;
 }
 
 .navbar a {
-  color: #959CA4;
+  color: #e3eaf3;
 }
 
 .left-sidebar {
