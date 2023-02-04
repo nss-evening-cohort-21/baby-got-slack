@@ -2,8 +2,10 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getMessages = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/messages.json?orderBy="uid"&equalTo"${uid}"`, {
+// eslint-disable-next-line camelcase
+const getMessages = (channel_id) => new Promise((resolve, reject) => {
+  // eslint-disable-next-line camelcase
+  fetch(`${endpoint}/messages.json?orderBy="channel_id"&equalTo"${channel_id}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
