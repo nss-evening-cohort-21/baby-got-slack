@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import {
   Button, FloatingLabel, Form, Stack,
 } from 'react-bootstrap';
@@ -12,10 +11,9 @@ const initialState = {
   message: '',
 };
 
-export default function MessageForm({ obj }) {
+export default function MessageForm({ obj, onUpdate }) {
   const [formInput, setFormInput] = useState(initialState);
   const [channels, setChannels] = useState([]);
-  const router = useRouter();
   const { user } = useAuth();
   const time = new Date().toLocaleString('en-US', {
     year: 'numeric',
@@ -42,14 +40,16 @@ export default function MessageForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateMessage(formInput)
-        .then(() => router.push('/'));
+        .then(onUpdate);
     } else {
       const payload = {
         ...formInput, uid: user.uid, timestamp: time, name: user.displayName,
       };
       createMessage(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updateMessage(patchPayload).then(() => router.push('/'));
+        updateMessage(patchPayload).then(() => {
+          onUpdate();
+        });
       });
     }
   };
@@ -104,8 +104,10 @@ MessageForm.propTypes = {
     channel_id: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
+  onUpdate: PropTypes.func,
 };
 
 MessageForm.defaultProps = {
   obj: initialState,
+  onUpdate: () => {},
 };
