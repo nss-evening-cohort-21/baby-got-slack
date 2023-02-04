@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getMessages } from '../api/messagesData';
 import { useAuth } from '../utils/context/authContext';
 import MessageCard from '../components/MessageCard';
+import MessageForm from '../components/forms/MessageForm';
 
 function MainPage() {
   const [messages, setMessages] = useState([]);
@@ -25,6 +26,8 @@ function MainPage() {
           <MessageCard key={message.channel_id} messageObj={message} onUpdate={getAllTheMessages} />
         ))}
       </div>
+
+      <MessageForm />
 
     </div>
   );
