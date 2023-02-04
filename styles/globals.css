@@ -18,7 +18,7 @@ a {
 }
 
 body {
-  background-color: #1d9555;
+  background-color: #F8F8F8;
 }
 
 .navbar {
@@ -26,7 +26,7 @@ body {
 }
 
 .navbar a {
-  color: wheat;
+  color: #959CA4;
 }
 
 .left-sidebar {
@@ -51,7 +51,7 @@ body {
 }
 
 .navbar .dropdown-menu {
-  background-color: rgb(44, 138, 102);
+  background-color: #959CA4;
 }
 
 .brand {
