@@ -1,55 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-// import PropTypes from 'prop-types';
-// import { useRouter } from 'next/router';
-// import { useAuth } from '../../utils/context/authContext';
-// import { createChannel, updateChannel } from '../../api/channelsData';
+import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
+import { useAuth } from '../../utils/context/authContext';
+import { createChannel, updateChannel } from '../../api/channelsData';
 
-// const initialState = {
-//   name: '',
-//   description: '',
-//   private: false,
-// };
+const initialState = {
+  name: '',
+  description: '',
+  private: false,
+};
 
-function ChannelForm() {
+function ChannelForm({ obj }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  //   const [formInput, setFormInput] = useState(initialState);
-  //   const router = useRouter();
-  //   const { user } = useAuth();
+  const [formInput, setFormInput] = useState(initialState);
+  const router = useRouter();
+  const { user } = useAuth();
 
-  //   useEffect(() => {
-  //     if (obj.firebaseKey) setFormInput(obj);
-  //   }, [obj, user]);
+  useEffect(() => {
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj, user]);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormInput((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (obj.firebaseKey) {
-  //     updateChannel(formInput)
-  //     .then(() => router.push(`/channels/${obj.firebaseKey}`));
-  //   } else {
-  //     const payload = { ...formInput, uid: user.uid };
-  //     createChannel(payload).then(({ name }) => {
-  //       const patchPayload = { firebaseKey: name };
-  //       updateChannel(patchPayload).then(() => {
-  //         router.push('/channels')
-  //       });
-  //     });
-  //   }
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (obj.firebaseKey) {
+      updateChannel(formInput)
+        .then(() => router.push(`/channels/${obj.firebaseKey}`));
+    } else {
+      const payload = { ...formInput, uid: user.uid };
+      createChannel(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updateChannel(patchPayload).then(() => {
+          router.push('/');
+        });
+      });
+    }
+  };
 
   return (
     <>
@@ -66,6 +66,7 @@ function ChannelForm() {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        onSubmit={handleSubmit}
       >
         <Modal.Header closeButton>
           <Modal.Title>Create a Channel</Modal.Title>
@@ -85,9 +86,9 @@ function ChannelForm() {
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
-                  id="name"
-                // value={formInput.name}
-                // onChange={handleChange}
+                  name="name"
+                  value={formInput.name}
+                  onChange={handleChange}
                   type="text"
                   placeholder="# e.g. plan-budget"
                 />
@@ -98,9 +99,9 @@ function ChannelForm() {
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
-                  id="description"
-                // value={formInput.description}
-                // onChange={handleChange}
+                  name="description"
+                  value={formInput.description}
+                  onChange={handleChange}
                   type="text"
                   placeholder=""
                 />
@@ -115,24 +116,25 @@ function ChannelForm() {
                   name="private"
                   label="Make private"
                   checked=""
-                  // onChange={(e) => {
-                  //   setFormInput((prevState) => ({
-                  //     ...prevState,
-                  //     private: e.target.checked,
-                  //   }));
-                  // }}
+                  onChange={(e) => {
+                    setFormInput((prevState) => ({
+                      ...prevState,
+                      private: e.target.checked,
+                    }));
+                  }}
                 />
               </div>
             </form>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button style={{
+          <Button
+            type="submit"
+          >{obj.firebaseKey ? 'Update' : 'Create'} Create
+            {/* style={{
             backgroundColor: '#DDDDDD',
             borderColor: '#DDDDDD',
-          }}
-          >
-            Create
+          }} */}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -140,17 +142,17 @@ function ChannelForm() {
   );
 }
 
-// ChannelForm.propTypes = {
-//   obj: PropTypes.shape({
-//     name: PropTypes.string,
-//     description: PropTypes.string,
-//     private: PropTypes.bool,
-//     firebaseKey: PropTypes.string,
-//   }),
-// };
+ChannelForm.propTypes = {
+  obj: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    private: PropTypes.bool,
+    firebaseKey: PropTypes.string,
+  }),
+};
 
-// ChannelForm.defaultProps = {
-//   obj: initialState,
-// };
+ChannelForm.defaultProps = {
+  obj: initialState,
+};
 
 export default ChannelForm;

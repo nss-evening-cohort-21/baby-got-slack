@@ -69,3 +69,7 @@ body {
 .navbg {
   background-color: white;
 }
+
+#create-channel:hover {
+  background-color: #007A5A;
+}

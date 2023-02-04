@@ -28,8 +28,8 @@ function Sidebar() {
           Icon
         </Link>
       </div>
-      <Navbar.Toggle style={{ fontSize: '20px', color: '#959CA4' }} aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse style={{ fontSize: '20px', color: '#959CA4' }} id="basic-navbar-nav">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="flex-column">
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>Channels</div>
