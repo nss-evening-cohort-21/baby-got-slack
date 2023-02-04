@@ -5,7 +5,7 @@ import { getMessages } from '../../api/messagesData';
 import { useAuth } from '../../utils/context/authContext';
 import MessageCard from '../../components/MessageCard';
 
-export default function Cerebro() {
+export default function SearchBar() {
   const [searchMessages, setSearchMessages] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
