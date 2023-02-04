@@ -33,7 +33,7 @@ const getSingleChannel = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const createChannel = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/channels/.json`, {
+  fetch(`${endpoint}/channels.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

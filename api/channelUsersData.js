@@ -33,7 +33,7 @@ const getSingleChannelUser = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const createChannelUser = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/channelUsers/.json`, {
+  fetch(`${endpoint}/channelUsers.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
