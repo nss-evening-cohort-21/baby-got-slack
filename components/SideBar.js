@@ -51,7 +51,7 @@ function Sidebar() {
             </Button>
           </div>
           {channels.map((channel) => (
-            <Link key={channel.id} passHref href={`channel/${channel.firebaseKey}`}>
+            <Link key={channel.firebaseKey} passHref href={`channel/${channel.firebaseKey}`}>
               <Nav.Link># {channel.name}</Nav.Link>
             </Link>
           ))}
