@@ -23,7 +23,7 @@ function MainPage() {
     <div className="text-center my-4">
       <div>
         {messages.map((message) => (
-          <MessageCard key={message.channel_id} messageObj={message} onUpdate={getAllTheMessages} />
+          <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
         ))}
       </div>
 
