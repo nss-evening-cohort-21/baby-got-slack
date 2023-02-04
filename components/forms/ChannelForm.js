@@ -14,7 +14,7 @@ const initialState = {
   private: false,
 };
 
-function ChannelForm({ obj }) {
+function ChannelForm({ obj, onUpdate }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -45,7 +45,8 @@ function ChannelForm({ obj }) {
       createChannel(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateChannel(patchPayload).then(() => {
-          router.push('/');
+          onUpdate();
+          handleClose();
         });
       });
     }
@@ -66,7 +67,6 @@ function ChannelForm({ obj }) {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        onSubmit={handleSubmit}
       >
         <Modal.Header closeButton>
           <Modal.Title>Create a Channel</Modal.Title>
@@ -76,7 +76,7 @@ function ChannelForm({ obj }) {
           </div>
 
           <div className="w-full max-w-xs">
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
               <div className="w-full px-3">
                 <FloatingLabel
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -124,19 +124,15 @@ function ChannelForm({ obj }) {
                   }}
                 />
               </div>
+              <Modal.Footer>
+                <Button
+                  type="submit"
+                >{obj.firebaseKey ? 'Update' : 'Create'} Form
+                </Button>
+              </Modal.Footer>
             </form>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            type="submit"
-          >{obj.firebaseKey ? 'Update' : 'Create'} Create
-            {/* style={{
-            backgroundColor: '#DDDDDD',
-            borderColor: '#DDDDDD',
-          }} */}
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
@@ -149,10 +145,12 @@ ChannelForm.propTypes = {
     private: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }),
+  onUpdate: PropTypes.func,
 };
 
 ChannelForm.defaultProps = {
   obj: initialState,
+  onUpdate: () => {},
 };
 
 export default ChannelForm;
