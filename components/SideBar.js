@@ -21,10 +21,10 @@ function Sidebar() {
           Icon
         </Link>
       </div>
-      <Navbar.Toggle style={{ fontSize: '20px', color: '#959CA4' }} aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse style={{ fontSize: '20px', color: '#959CA4' }} id="basic-navbar-nav">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="flex-column">
-          <NavDropdown style={{ fontSize: '20px', color: '#959CA4' }} title="Channels" id="basic-nav-dropdown">
+          <NavDropdown title="Channels" id="basic-nav-dropdown">
             {users.map((user) => (
               <NavDropdown.Item key={user.id} href={`#action/${user.id}`}>
                 # {user.name}
