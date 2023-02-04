@@ -18,7 +18,15 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #1d9555;
+}
+
+.navbar {
+  background-color: #7d2b61;
+}
+
+.navbar a {
+  color: wheat;
 }
 
 .left-sidebar {
@@ -29,9 +37,21 @@ body {
   width: 250px;
 }
 
+.left-sidebar .nav-link:hover {
+  color: rgb(233, 142, 142); /* change this to the color you want */
+}
+
+.left-sidebar .navbar-brand:hover {
+  color: rgb(233, 142, 142); /* change this to the color you want */
+}
+
 .sidebar-dropdown {
   position: relative;
   top: -10px;
+}
+
+.navbar .dropdown-menu {
+  background-color: rgb(44, 138, 102);
 }
 
 .brand {
@@ -43,4 +63,8 @@ body {
 
 .container {
   margin-left: 250px;
+}
+
+.navbg {
+  background-color: white;
 }
