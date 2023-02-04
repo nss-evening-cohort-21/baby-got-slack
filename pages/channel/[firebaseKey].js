@@ -27,7 +27,7 @@ function ViewChannel() {
         ))}
       </div>
 
-      <MessageForm />
+      <MessageForm onUpdate={getAllTheMessages} />
 
     </div>
   );
