@@ -22,7 +22,7 @@ body {
 }
 
 .navbar {
-  background-color: #7d2b61;
+  background-color: #4B154B;
 }
 
 .navbar a {
@@ -67,4 +67,8 @@ body {
 
 .navbg {
   background-color: white;
+}
+
+#create-channel:hover {
+  background-color: #007A5A;
 }
