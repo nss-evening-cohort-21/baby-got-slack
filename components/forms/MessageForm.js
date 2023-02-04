@@ -14,6 +14,13 @@ export default function MessageForm({ obj }) {
   // const [channels, setChannels] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
+  const time = new Date().toLocaleString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +36,7 @@ export default function MessageForm({ obj }) {
       updateMessage(formInput)
         .then(() => router.push('/'));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      const payload = { ...formInput, uid: user.uid, timestamp: time };
       createMessage(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateMessage(patchPayload).then(() => router.push('/'));
@@ -62,7 +69,7 @@ MessageForm.propTypes = {
   obj: PropTypes.shape({
     message: PropTypes.string,
     channel_id: PropTypes.string,
-    timestamp: PropTypes.number,
+    timestamp: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };
