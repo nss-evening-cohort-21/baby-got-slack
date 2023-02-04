@@ -85,6 +85,18 @@ const starredChannels = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getChannelMessages = (channelFirebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/messages.json?orderBy="channel_id"&equalTo="${channelFirebaseKey}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'applications.json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   getChannels,
   getSingleChannel,
@@ -92,4 +104,5 @@ export {
   updateChannel,
   deleteChannel,
   starredChannels,
+  getChannelMessages,
 };
