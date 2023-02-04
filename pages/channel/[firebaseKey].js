@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getMessages } from '../../api/messagesData';
 import MessageCard from '../../components/MessageCard';
 import MessageForm from '../../components/forms/MessageForm';
+import { getChannelMessages } from '../../api/channelsData';
 
 function ViewChannel() {
   const [messages, setMessages] = useState([]);
@@ -11,11 +11,11 @@ function ViewChannel() {
   const { firebaseKey } = router.query;
 
   const getAllTheMessages = () => {
-    getMessages(firebaseKey).then(setMessages);
+    getChannelMessages(firebaseKey).then(setMessages);
   };
 
   useEffect(() => {
-    getMessages(firebaseKey).then(setMessages);
+    getChannelMessages(firebaseKey).then(setMessages);
   }, [firebaseKey]);
 
   return (
