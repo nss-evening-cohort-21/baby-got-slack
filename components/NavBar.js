@@ -13,8 +13,8 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Link passHref href="/profile">
-              <Navbar.Brand>
-                <Image src={user.photoURL} alt="userURL" width="100px" height="100px" />
+              <Navbar.Brand className="navbar-brand">
+                <Image src={user.photoURL} alt="userURL" width="40%" height="40%" />
               </Navbar.Brand>
             </Link>
           </Nav>
