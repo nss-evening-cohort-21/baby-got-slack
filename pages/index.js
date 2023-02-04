@@ -27,7 +27,7 @@ function MainPage() {
         ))}
       </div>
 
-      <MessageForm />
+      <MessageForm onUpdate={getAllTheMessages} />
 
     </div>
   );
