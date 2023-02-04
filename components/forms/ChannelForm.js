@@ -23,6 +23,14 @@ function ChannelForm({ obj }) {
   const router = useRouter();
   const { user } = useAuth();
 
+  const [channelList, setChannelList] = useState([]);
+
+  const channelArray = (e) => {
+    e.preventDefault();
+    setChannelList([...channelList, e.target[0].value]);
+    e.target[0].value = '';
+  };
+
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
@@ -45,7 +53,7 @@ function ChannelForm({ obj }) {
       createChannel(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateChannel(patchPayload).then(() => {
-          router.push('/');
+          router.push(`/channels/${obj.firebaseKey}`);
         });
       });
     }
@@ -130,6 +138,7 @@ function ChannelForm({ obj }) {
         <Modal.Footer>
           <Button
             type="submit"
+            onSubmit={channelArray}
           >{obj.firebaseKey ? 'Update' : 'Create'} Create
             {/* style={{
             backgroundColor: '#DDDDDD',
