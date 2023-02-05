@@ -13,7 +13,8 @@ export default function SearchBar() {
 
   const searchAllMessages = () => {
     getMessages(user.uid).then((messages) => {
-      const filteredMessages = messages.filter((message) => message.message.toLowerCase().includes(searchBar) || message.timestamp.includes(searchBar));
+      const filteredMessages = messages.filter((message) => message.message.toLowerCase().includes(searchBar) || message.name.toLowerCase().includes(searchBar));
+
       setSearchMessages(filteredMessages);
     });
   };
