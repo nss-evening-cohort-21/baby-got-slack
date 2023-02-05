@@ -21,6 +21,14 @@ body {
   background-color: #F8F8F8;
 }
 
+#message-card {
+  background-color: #F8F8F8;
+}
+
+#message-card:hover {
+  background-color: rgb(172, 169, 169);
+}
+
 .navbar {
   background-color: #7d2b61;
   display: flex;

@@ -20,16 +20,13 @@ function MainPage() {
 
   return (
 
-    <div className="text-center my-4">
-      <div>
+    <>
+      <div className="text-center my-4">
         {messages.map((message) => (
           <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
         ))}
-      </div>
-
-      <MessageForm onUpdate={getAllTheMessages} />
-
-    </div>
+      </div><MessageForm onUpdate={getAllTheMessages} />
+    </>
   );
 }
 

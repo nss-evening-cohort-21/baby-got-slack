@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import Link from 'next/link';
-import { Button } from 'react-bootstrap';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { deleteMessage } from '../api/messagesData';
 
 function MessageCard({ messageObj, onUpdate }) {
@@ -13,17 +12,15 @@ function MessageCard({ messageObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
+    <Card id="message-card" className="border-0 hover-overlay ripple shadow-1-strong" style={{ width: 'auto', margin: '10px' }}>
       <Card.Body>
         <Card.Title>{messageObj.name}</Card.Title>
         <Card.Subtitle>{messageObj.timestamp}</Card.Subtitle>
         <p className="card-text bold">{messageObj.message}</p>
-        <Link href={`/messages/edit/${messageObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisMessage} className="m-2">
-          DELETE
-        </Button>
+        <DropdownButton className="position-absolute top-0 end-0" id="dropdown-basic-button" title="" size="sm" variant="light">
+          <Dropdown.Item href={`/messages/edit/${messageObj.firebaseKey}`}>Edit</Dropdown.Item>
+          <Dropdown.Item onClick={deleteThisMessage}>Delete</Dropdown.Item>
+        </DropdownButton>
       </Card.Body>
     </Card>
   );

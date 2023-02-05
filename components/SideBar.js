@@ -57,9 +57,7 @@ function Sidebar() {
           ))}
 
           <ChannelForm onUpdate={getAllChannels} />
-          <Link passHref href="/messages/new">
-            <Nav.Link>New Message</Nav.Link>
-          </Link>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>
