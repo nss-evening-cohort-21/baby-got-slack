@@ -97,6 +97,18 @@ const getChannelMessages = (channelFirebaseKey) => new Promise((resolve, reject)
     .catch(reject);
 });
 
+const deleteSingleChannel = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/channels/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application.json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getChannels,
   getSingleChannel,
@@ -105,4 +117,5 @@ export {
   deleteChannel,
   starredChannels,
   getChannelMessages,
+  deleteSingleChannel,
 };
