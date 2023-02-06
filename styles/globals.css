@@ -19,6 +19,7 @@ a {
 
 body {
   background-color: #F8F8F8;
+  overflow-x: hidden;
   padding-top: 50px;
   margin-bottom: 75px;
 }
@@ -87,6 +88,14 @@ body {
 
 #create-channel:hover {
   background-color: #007A5A;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: #e1dfdf;
 }
 
 #message-form {

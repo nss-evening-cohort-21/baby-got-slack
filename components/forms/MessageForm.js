@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Button, FloatingLabel, Form, Stack,
 } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
 import { createMessage, updateMessage } from '../../api/messagesData';
 import { getChannels } from '../../api/channelsData';
@@ -15,6 +16,8 @@ export default function MessageForm({ obj, onUpdate }) {
   const [formInput, setFormInput] = useState(initialState);
   const [channels, setChannels] = useState([]);
   const { user } = useAuth();
+  const router = useRouter();
+
   const time = new Date().toLocaleString('en-US', {
     year: 'numeric',
     month: '2-digit',
@@ -38,9 +41,10 @@ export default function MessageForm({ obj, onUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormInput(initialState);
     if (obj.firebaseKey) {
       updateMessage(formInput)
-        .then(onUpdate);
+        .then(() => router.push('/'));
     } else {
       const payload = {
         ...formInput, uid: user.uid, timestamp: time, name: user.displayName,
@@ -55,30 +59,31 @@ export default function MessageForm({ obj, onUpdate }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} id="message-form">
-      <Stack direction="horizontal" gap={3}>
-        <FloatingLabel className="mb-3" label="Message" controlId="message">
-          <Form.Control
-            type="text"
-            placeholder="Write Your Message"
-            name="message"
-            value={formInput.message}
-            onChange={handleChange}
-            required
-          />
-        </FloatingLabel>
+    <footer id="footer">
+      <Form onSubmit={handleSubmit}>
+        <Stack direction="horizontal" gap={3}>
+          <FloatingLabel className="mb-3" label="Message" controlId="message">
+            <Form.Control
+              type="text"
+              placeholder="Write Your Message"
+              name="message"
+              value={formInput.message}
+              onChange={handleChange}
+              required
+            />
+          </FloatingLabel>
 
-        <FloatingLabel label="Channel" controlId="channel_id">
-          <Form.Select
-            aria-label="Channel Id"
-            name="channel_id"
-            onChange={handleChange}
-            className="mb-3"
-            value={obj.channel_id}
-            required
-          >
-            <option value="">Select A Channel</option>
-            {
+          <FloatingLabel label="Channel" controlId="messageChannelId">
+            <Form.Select
+              aria-label="Channel Id"
+              name="channel_id"
+              onChange={handleChange}
+              className="mb-3"
+              value={obj.channel_id}
+              required
+            >
+              <option value="">Select A Channel</option>
+              {
             channels.map((channel) => (
               <option
                 key={channel.firebaseKey}
@@ -88,13 +93,14 @@ export default function MessageForm({ obj, onUpdate }) {
               </option>
             ))
           }
-          </Form.Select>
-        </FloatingLabel>
+            </Form.Select>
+          </FloatingLabel>
 
-        <Button variant="primary" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Message
-        </Button>
-      </Stack>
-    </Form>
+          <Button variant="primary" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Message
+          </Button>
+        </Stack>
+      </Form>
+    </footer>
   );
 }
 
