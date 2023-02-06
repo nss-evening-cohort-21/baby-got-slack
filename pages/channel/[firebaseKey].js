@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import MessageForm from '../../components/forms/MessageForm';
-import MessageCard from '../../components/MessageCard';
 import ChannelHeader from '../../components/ChannelHeader';
-import viewChannelMessages from '../../api/mergedData';
+import MessageCard from '../../components/MessageCard';
+import { viewChannelMessages } from '../../api/mergedData';
 
 function ViewChannel() {
   // const [messages, setMessages] = useState([]);
@@ -17,8 +17,9 @@ function ViewChannel() {
   };
 
   useEffect(() => {
-    getAllTheMessages();
-  }, []);
+    viewChannelMessages(firebaseKey).then(setChannelDetails);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firebaseKey]);
 
   return (
 

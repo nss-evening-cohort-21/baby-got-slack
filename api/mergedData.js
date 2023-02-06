@@ -1,4 +1,7 @@
-import { getSingleChannel, getChannelMessages } from './channelsData';
+import {
+  getSingleChannel, getChannelMessages, deleteSingleChannel,
+} from './channelsData';
+import { deleteMessage } from './messagesData';
 
 const viewChannelMessages = (channelFirebaseKey) => new Promise((resolve, reject) => {
   Promise.all([getSingleChannel(channelFirebaseKey),
@@ -8,4 +11,14 @@ const viewChannelMessages = (channelFirebaseKey) => new Promise((resolve, reject
     }).catch((error) => reject(error));
 });
 
-export default viewChannelMessages;
+const deleteChannelMessages = (channelId) => new Promise((resolve, reject) => {
+  getChannelMessages(channelId).then((messagesArray) => {
+    const deleteMessagePromises = messagesArray.map((message) => deleteMessage(message.firebaseKey));
+
+    Promise.all(deleteMessagePromises).then(() => {
+      deleteSingleChannel(channelId).then(resolve);
+    });
+  }).catch((error) => reject(error));
+});
+
+export { viewChannelMessages, deleteChannelMessages };
