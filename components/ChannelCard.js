@@ -2,12 +2,12 @@ import React from 'react';
 import { Card } from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import { deleteChannel } from '../api/channelsData';
+import { deleteChannelMessages } from '../api/mergedData';
 
 function ChannelCard({ channelObj, onUpdate }) {
   const deleteThisChannel = () => {
     if (window.confirm(`Delete ${channelObj.name}?`)) {
-      deleteChannel(channelObj.firebaseKey).then(() => onUpdate());
+      deleteChannelMessages(channelObj.firebaseKey).then(() => onUpdate());
     }
   };
   return (
