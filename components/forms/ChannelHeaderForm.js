@@ -14,7 +14,7 @@ const initialState = {
   private: false,
 };
 
-function ChannelForm({ obj, onUpdate }) {
+function ChannelHeaderForm({ obj, onUpdate }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -57,9 +57,14 @@ function ChannelForm({ obj, onUpdate }) {
       <Button
         onClick={handleShow}
         style={{
-          backgroundColor: '#4A154B', fontSize: '15px', color: '#E2EAF3', borderColor: '#4A154B',
+          width: '50px',
+          fontSize: '6px',
+          marginLeft: '20px',
+          borderColor: 'transparent',
+          backgroundColor: 'transparent',
+          color: 'gray',
         }}
-      >+ Add channels
+      >╲╱
       </Button>
 
       <Modal
@@ -69,7 +74,7 @@ function ChannelForm({ obj, onUpdate }) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Create a Channel</Modal.Title>
+          <Modal.Title>Channel Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mb-4 text-gray-700">Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.
@@ -138,7 +143,7 @@ function ChannelForm({ obj, onUpdate }) {
   );
 }
 
-ChannelForm.propTypes = {
+ChannelHeaderForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
@@ -148,9 +153,9 @@ ChannelForm.propTypes = {
   onUpdate: PropTypes.func,
 };
 
-ChannelForm.defaultProps = {
+ChannelHeaderForm.defaultProps = {
   obj: initialState,
   onUpdate: () => {},
 };
 
-export default ChannelForm;
+export default ChannelHeaderForm;
