@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { Nav, Navbar, Button } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { getChannels } from '../api/channelsData';
 import ChannelForm from './forms/ChannelForm';
 
 function Sidebar() {
   const [channels, setChannels] = useState([]); // creating 2 state variables channels is an empty array
-  const [showForm, setShowForm] = useState(false); // creating 2 state variables showForm is set to false
 
   // state variables used in React components to store data that affects components' behavior/render
   // channels and showForm manage data and state of component
@@ -33,10 +32,6 @@ function Sidebar() {
   }, [channels]); // useEffect depends the values of state variable channels, dependency array helps to avoid unnecessary re-renders
   // retrieves an updated list of channels whenever the state variable changes
 
-  const handleShow = () => {
-    setShowForm(!showForm); // toggles the showForm state variable between true and false
-  }; // when showForm is true, add channel modal pops up
-
   // returns a Bootstrap navbar with various components & elements i.e. brand, toggle, collapse
   // Link component used for navigation
   // Button component used to toggle form visibility
@@ -59,20 +54,6 @@ function Sidebar() {
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ color: '#E2EAF3' }}>Channels
             </div>
-            <Button
-              type="button"
-              onClick={handleShow}
-              style={{
-                backgroundColor: 'transparent',
-                border: 'none',
-                marginLeft: '5px',
-                fontSize: '20px',
-                color: '#E2EAF3',
-                cursor: 'pointer',
-              }}
-            >
-              +
-            </Button>
           </div>
           {channels.map((channel) => (
             <Link key={channel.firebaseKey} passHref href={`/channel/${channel.firebaseKey}`}>
