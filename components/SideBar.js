@@ -1,4 +1,5 @@
 import Link from 'next/link';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState, useEffect } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { getChannels } from '../api/channelsData';
@@ -44,9 +45,6 @@ function Sidebar() {
         <Navbar.Brand href="/" style={{ fontSize: '20px', color: '#E2EAF3' }}>
           Baby Got Slack
         </Navbar.Brand>
-        <Link passHref href="/messages/new">
-          Icon
-        </Link>
       </div>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
