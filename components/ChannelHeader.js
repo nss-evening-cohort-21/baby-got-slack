@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
-import ChannelForm from './forms/ChannelForm';
+import ChannelHeaderForm from './forms/ChannelHeaderForm';
 
 function ChannelHeader() {
   // const [channelName, setChannelName] = useState({});
+  // const router = useRouter();
 
   // useEffect(() => {
   //   setChannelName(channelObj);
@@ -13,18 +13,9 @@ function ChannelHeader() {
   return (
     <div id="channel-header">
       <div className="card">
-        <div className="card-body" style={{ display: 'flex', flex: 'flex-wrap', justifyContent: 'center' }}>
+        <div className="card-body" style={{ display: 'flex', flex: 'flex-wrap' }}>
           <h5 className="card-title">Channel Name</h5>
-          <Button
-            onClick={ChannelForm}
-            style={{
-              width: '50px',
-              fontSize: '6px',
-              marginLeft: '20px',
-              borderColor: 'transparent',
-            }}
-          >╲╱
-          </Button>
+          <ChannelHeaderForm />
         </div>
       </div>
     </div>
