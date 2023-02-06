@@ -38,6 +38,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
 }
 
 .navbar a {
@@ -95,8 +96,9 @@ body {
 }
 
 #channel-header {
-  /* position: fixed; */
+  position: fixed;
   width: 100%;
+  z-index: 1;
 }
 
 /* #message-container {
