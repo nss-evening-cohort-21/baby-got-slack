@@ -28,7 +28,7 @@ export default function SearchBar() {
 
   return (
     <>
-      <div className="d-flex flex-wrap">
+      <div>
         {searchMessages.map((aim) => <MessageCard key={aim.firebaseKey} messageObj={aim} onUpdate={searchAllMessages} />)}
       </div>
     </>

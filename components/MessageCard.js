@@ -12,7 +12,7 @@ function MessageCard({ messageObj, onUpdate }) {
   };
 
   return (
-    <Card id="message-card" className="border-0 hover-overlay ripple shadow-1-strong" style={{ width: 'auto', margin: '10px' }}>
+    <Card id="message-card" className="border-0 hover-overlay ripple shadow-1-strong" style={{ width: '91%', margin: '10px' }}>
       <Card.Body>
         <Card.Title>{messageObj.name}</Card.Title>
         <Card.Subtitle>{messageObj.timestamp}</Card.Subtitle>
@@ -33,6 +33,7 @@ MessageCard.propTypes = {
     timestamp: PropTypes.string,
     message: PropTypes.string,
     firebaseKey: PropTypes.string,
+    uid: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
