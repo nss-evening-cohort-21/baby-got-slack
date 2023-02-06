@@ -46,7 +46,7 @@ function Sidebar() {
   return (
     <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg">
       <div>
-        <Navbar.Brand href="/" style={{ fontSize: '20px', color: '#959CA4' }}>
+        <Navbar.Brand href="/" style={{ fontSize: '20px', color: '#E2EAF3' }}>
           Baby Got Slack
         </Navbar.Brand>
         <Link passHref href="/messages/new">
@@ -57,7 +57,8 @@ function Sidebar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="flex-column">
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div>Channels</div>
+            <div style={{ color: '#E2EAF3' }}>Channels
+            </div>
             <Button
               type="button"
               onClick={handleShow}
@@ -66,7 +67,7 @@ function Sidebar() {
                 border: 'none',
                 marginLeft: '5px',
                 fontSize: '20px',
-                color: '#959CA4',
+                color: '#E2EAF3',
                 cursor: 'pointer',
               }}
             >

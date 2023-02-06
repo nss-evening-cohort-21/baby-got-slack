@@ -57,7 +57,7 @@ function ChannelForm({ obj, onUpdate }) {
       <Button
         onClick={handleShow}
         style={{
-          backgroundColor: '#7D2B61', fontSize: '20px', color: '#959CA4', borderColor: '#7D2B61',
+          backgroundColor: '#4A154B', fontSize: '15px', color: '#E2EAF3', borderColor: '#4A154B',
         }}
       >+ Add channels
       </Button>

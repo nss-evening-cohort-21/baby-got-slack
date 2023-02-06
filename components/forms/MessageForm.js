@@ -55,7 +55,7 @@ export default function MessageForm({ obj, onUpdate }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} id="message-form">
       <Stack direction="horizontal" gap={3}>
         <FloatingLabel className="mb-3" label="Message" controlId="message">
           <Form.Control

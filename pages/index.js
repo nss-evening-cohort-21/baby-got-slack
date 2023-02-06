@@ -3,6 +3,7 @@ import { getMessages } from '../api/messagesData';
 import { useAuth } from '../utils/context/authContext';
 import MessageCard from '../components/MessageCard';
 import MessageForm from '../components/forms/MessageForm';
+import ChannelHeader from '../components/ChannelHeader';
 
 function MainPage() {
   const [messages, setMessages] = useState([]);
@@ -20,13 +21,17 @@ function MainPage() {
 
   return (
 
-    <>
-      <div className="text-center my-4">
+    <div className="text-center my-4">
+      <div id="channel-card">
+        <ChannelHeader />
+      </div>
+
+      <div id="message-container">
         {messages.map((message) => (
           <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
         ))}
       </div><MessageForm onUpdate={getAllTheMessages} />
-    </>
+    </div>
   );
 }
 
