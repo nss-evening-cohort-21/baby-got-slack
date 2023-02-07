@@ -4,11 +4,13 @@ import MessageForm from '../../components/forms/MessageForm';
 import ChannelHeader from '../../components/ChannelHeader';
 import MessageCard from '../../components/MessageCard';
 import { viewChannelMessages } from '../../api/mergedData';
+import { useAuth } from '../../utils/context/authContext';
 
 function ViewChannel() {
   // const [messages, setMessages] = useState([]);
   const router = useRouter();
   const [channelDetails, setChannelDetails] = useState({});
+  const { user } = useAuth();
 
   const { firebaseKey } = router.query;
 
@@ -30,7 +32,7 @@ function ViewChannel() {
 
       <div id="message-container">
         {channelDetails.messages?.map((message) => (
-          <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
+          <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} isMine={message.uid === user.uid} />
         ))}
       </div>
 
