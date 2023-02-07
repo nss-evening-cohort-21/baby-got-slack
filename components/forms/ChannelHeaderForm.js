@@ -12,6 +12,7 @@ import { deleteChannelMessages } from '../../api/mergedData';
 const initialState = {
   name: '',
   description: '',
+  starred: false,
   private: false,
 };
 
@@ -69,7 +70,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
           marginLeft: '20px',
           borderColor: 'transparent',
           backgroundColor: 'transparent',
-          color: 'gray',
+          color: '#5A5A5A',
         }}
       >╲╱
       </Button>
@@ -155,7 +156,8 @@ function ChannelHeaderForm({ obj, onUpdate }) {
               <Modal.Footer>
                 <Button
                   type="submit"
-                >{obj.firebaseKey ? 'Update' : 'Create'} Form
+                >
+                  Update
                 </Button>
                 <Button variant="danger" onClick={deleteThisChannel} className="m-2">
                   Delete

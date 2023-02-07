@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, FloatingLabel, Form, Stack,
+  Button, Card, FloatingLabel, Form, Stack,
 } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
@@ -59,15 +59,16 @@ export default function MessageForm({ obj, onUpdate }) {
   };
 
   return (
-    <footer id="footer">
+    <Card id="footer" style={{ height: '75px', width: '80%' }}>
       <Form onSubmit={handleSubmit}>
         <Stack direction="horizontal" gap={3}>
-          <FloatingLabel className="mb-3" label="Message" controlId="message">
+          <FloatingLabel className="mb-3" label="Message" controlId="message" style={{ width: '800px' }}>
             <Form.Control
               type="text"
               placeholder="Write Your Message"
               name="message"
               value={formInput.message}
+              style={{ height: '75px' }}
               onChange={handleChange}
               required
             />
@@ -77,7 +78,7 @@ export default function MessageForm({ obj, onUpdate }) {
           </Button>
         </Stack>
       </Form>
-    </footer>
+    </Card>
   );
 }
 
