@@ -70,7 +70,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
           marginLeft: '20px',
           borderColor: 'transparent',
           backgroundColor: 'transparent',
-          color: 'gray',
+          color: '#5A5A5A',
         }}
       >╲╱
       </Button>

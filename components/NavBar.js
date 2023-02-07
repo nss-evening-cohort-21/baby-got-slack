@@ -15,8 +15,8 @@ export default function NavBar() {
           <Nav className="me-auto">
             <SearchBar />
             <Link passHref href="/profile">
-              <Navbar.Brand className="navbar-brand">
-                <Image src={user.photoURL} alt="userURL" width="40%" height="40%" />
+              <Navbar.Brand className="navbar-brand" style={{ marginLeft: '450px' }}>
+                <Image src={user.photoURL} alt="userURL" width="40%" height="40%" id="navbar-profile-image" />
               </Navbar.Brand>
             </Link>
           </Nav>

@@ -2,11 +2,16 @@ import Link from 'next/link';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState, useEffect } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { getChannels } from '../api/channelsData';
+import { getDummyMembers } from '../api/dummyMembersData';
 import ChannelForm from './forms/ChannelForm';
 
 function Sidebar() {
   const [channels, setChannels] = useState([]); // creating 2 state variables channels is an empty array
+  const [members, setMembers] = useState([]);
+  const router = useRouter();
+  const { firebaseKey } = router.query;
 
   // state variables used in React components to store data that affects components' behavior/render
   // channels and showForm manage data and state of component
@@ -28,9 +33,14 @@ function Sidebar() {
     getChannels().then(setChannels); // calls getChannels function, sets returned result to channels state variable
   };
 
+  const getAllDummyMembers = () => {
+    getDummyMembers(firebaseKey).then(setMembers);
+  };
+
   useEffect(() => {
-    getAllChannels(); // calls getAllChannels function whenever channels state variable changes, if there is no change there will be no re-render
-  }, [channels]); // useEffect depends the values of state variable channels, dependency array helps to avoid unnecessary re-renders
+    getAllChannels();
+    getAllDummyMembers(); // calls getAllChannels function whenever channels state variable changes, if there is no change there will be no re-render
+  }, [members, firebaseKey, channels]); // useEffect depends the values of state variable channels, dependency array helps to avoid unnecessary re-renders
   // retrieves an updated list of channels whenever the state variable changes
 
   // returns a Bootstrap navbar with various components & elements i.e. brand, toggle, collapse
@@ -67,6 +77,15 @@ function Sidebar() {
 
           <ChannelForm onUpdate={getAllChannels} />
 
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ color: '#E2EAF3', marginTop: '15px' }}>Direct messages
+            </div>
+          </div>
+          {members.map((member) => (
+            <Link key={member.firebaseKey} passHref href={`/member/${member.firebaseKey}`}>
+              <Nav.Link># {member.name}</Nav.Link>
+            </Link>
+          ))}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
