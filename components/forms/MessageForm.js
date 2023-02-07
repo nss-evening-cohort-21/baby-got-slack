@@ -44,7 +44,7 @@ export default function MessageForm({ obj, onUpdate }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateMessage(formInput)
-        .then(() => router.push(`/channel/${firebaseKey}`));
+        .then(() => router.push('/'));
     } else {
       const payload = {
         ...formInput, uid: user.uid, timestamp: time, name: user.displayName, channel_id: firebaseKey,
