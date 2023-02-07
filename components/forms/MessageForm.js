@@ -53,6 +53,7 @@ export default function MessageForm({ obj, onUpdate }) {
         const patchPayload = { firebaseKey: name };
         updateMessage(patchPayload).then(() => {
           onUpdate();
+          setFormInput(initialState);
         });
       });
     }
@@ -62,7 +63,7 @@ export default function MessageForm({ obj, onUpdate }) {
     <Card id="footer" style={{ height: '75px', width: '80%' }}>
       <Form onSubmit={handleSubmit}>
         <Stack direction="horizontal" gap={3}>
-          <FloatingLabel className="mb-3" label="Message" controlId="message" style={{ width: '800px' }}>
+          <FloatingLabel style={{ width: '70%' }} className="mb-3" label="Message" controlId="message">
             <Form.Control
               type="text"
               placeholder="Write Your Message"
