@@ -35,7 +35,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
   };
 
   const getChannelDeets = () => {
-    getSingleChannel(firebaseKey).then(setFormInput);
+    getSingleChannel(firebaseKey).then(() => onUpdate());
   };
 
   useEffect(() => {
