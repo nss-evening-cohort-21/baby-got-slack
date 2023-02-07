@@ -8,7 +8,7 @@ export default function UserProfile() {
   const { user } = useAuth();
 
   return (
-    <div>
+    <div style={{ marginTop: '35px' }}>
       <Image src={user.photoURL} alt="userURL" width="100px" height="100px" />
       <h1>Name: {user.displayName}</h1>
       <h2>Email: {user.email}</h2>

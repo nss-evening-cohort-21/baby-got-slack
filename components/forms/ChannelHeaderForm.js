@@ -6,12 +6,13 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
-import { createChannel, updateChannel } from '../../api/channelsData';
+import { createChannel, getSingleChannel, updateChannel } from '../../api/channelsData';
 import { deleteChannelMessages } from '../../api/mergedData';
 
 const initialState = {
   name: '',
   description: '',
+  starred: false,
   private: false,
 };
 
@@ -21,8 +22,10 @@ function ChannelHeaderForm({ obj, onUpdate }) {
   const handleShow = () => setShow(true);
 
   const [formInput, setFormInput] = useState(initialState);
+  // const [description, setDescription] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
+  const { firebaseKey } = router.query;
 
   const deleteThisChannel = () => {
     if (window.confirm(`Delete ${obj.name}`)) {
@@ -30,9 +33,14 @@ function ChannelHeaderForm({ obj, onUpdate }) {
     }
   };
 
+  const getChannelDeets = () => {
+    getSingleChannel(firebaseKey).then(setFormInput);
+  };
+
   useEffect(() => {
+    getChannelDeets();
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+  }, [formInput, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +77,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
           marginLeft: '20px',
           borderColor: 'transparent',
           backgroundColor: 'transparent',
-          color: 'gray',
+          color: '#5A5A5A',
         }}
       >╲╱
       </Button>
@@ -155,7 +163,8 @@ function ChannelHeaderForm({ obj, onUpdate }) {
               <Modal.Footer>
                 <Button
                   type="submit"
-                >{obj.firebaseKey ? 'Update' : 'Create'} Form
+                >
+                  Update
                 </Button>
                 <Button variant="danger" onClick={deleteThisChannel} className="m-2">
                   Delete

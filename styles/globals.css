@@ -19,7 +19,6 @@ a {
 
 body {
   background-color: #F8F8F8;
-  overflow-x: hidden;
   padding-top: 50px;
   margin-bottom: 75px;
 }
@@ -34,7 +33,7 @@ body {
 
 .navbar {
   overflow: hidden;
-  background-color: #4A154B;
+  background-color: #340E36; 
   display: flex;
   position: fixed;
   top: 0;
@@ -52,6 +51,21 @@ body {
   left: 0;
   bottom: 0;
   width: 250px;
+  align-items: left;
+}
+
+.sidebar {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.brand-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 50px;
+  width: 100%;
+  padding: 10px;
 }
 
 .left-sidebar .nav-link:hover {
@@ -78,6 +92,10 @@ body {
   height: 60px;
 }
 
+#sidebar {
+  background-color: #4A154B;
+}
+
 .container {
   margin-left: 250px;
 }
@@ -92,7 +110,7 @@ body {
 
 #footer {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   width: 100%;
   height: 60px;
 }
@@ -104,8 +122,9 @@ body {
 }
 
 #channel-header {
-  position: relative;
-  width: 100%;
+  /* position: fixed; */
+  width: 80%;
+  z-index: 1;
 }
 
 #message-card {

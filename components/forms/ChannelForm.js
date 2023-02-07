@@ -39,13 +39,13 @@ function ChannelForm({ obj, onUpdate }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateChannel(formInput)
-        .then(() => router.push(`/channels/${obj.firebaseKey}`));
+        .then(() => router.push(`/channel/${obj.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createChannel(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateChannel(patchPayload).then(() => {
-          router.push(`/channels/${obj.firebaseKey}`);
+          router.push(`/channel/${obj.firebaseKey}`);
           onUpdate();
           handleClose();
         });
@@ -125,6 +125,22 @@ function ChannelForm({ obj, onUpdate }) {
                   }}
                 />
               </div>
+              <div className="mb-4">
+                <Form.Check
+                  className="text-grey mb-3"
+                  type="switch"
+                  id="starred"
+                  name="starred"
+                  label="Star"
+                  checked=""
+                  onChange={(e) => {
+                    setFormInput((prevState) => ({
+                      ...prevState,
+                      starred: e.target.checked,
+                    }));
+                  }}
+                />
+              </div>
               <Modal.Footer>
                 <Button
                   type="submit"
@@ -144,6 +160,7 @@ ChannelForm.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
     private: PropTypes.bool,
+    starred: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,

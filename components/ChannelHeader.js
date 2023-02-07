@@ -5,6 +5,12 @@ import ChannelHeaderForm from './forms/ChannelHeaderForm';
 import { getSingleChannel } from '../api/channelsData';
 import { useAuth } from '../utils/context/authContext';
 
+const initialState = {
+  name: '',
+  description: '',
+  private: false,
+  starred: false,
+};
 function ChannelHeader() {
   const [channelName, setChannelName] = useState({ name: '' });
   const router = useRouter();
@@ -38,7 +44,11 @@ ChannelHeader.propTypes = {
     private: PropTypes.bool,
     starred: PropTypes.bool,
     firebaseKey: PropTypes.string,
-  }).isRequired,
+  }),
+};
+
+ChannelHeader.defaultProps = {
+  obj: initialState,
 };
 
 export default ChannelHeader;
