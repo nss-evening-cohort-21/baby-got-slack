@@ -155,7 +155,8 @@ function ChannelHeaderForm({ obj, onUpdate }) {
               <Modal.Footer>
                 <Button
                   type="submit"
-                >{obj.firebaseKey ? 'Update' : 'Create'} Form
+                >
+                  Update
                 </Button>
                 <Button variant="danger" onClick={deleteThisChannel} className="m-2">
                   Delete

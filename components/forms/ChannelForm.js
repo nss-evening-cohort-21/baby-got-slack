@@ -125,6 +125,22 @@ function ChannelForm({ obj, onUpdate }) {
                   }}
                 />
               </div>
+              <div className="mb-4">
+                <Form.Check
+                  className="text-grey mb-3"
+                  type="switch"
+                  id="starred"
+                  name="starred"
+                  label="Star"
+                  checked=""
+                  onChange={(e) => {
+                    setFormInput((prevState) => ({
+                      ...prevState,
+                      starred: e.target.checked,
+                    }));
+                  }}
+                />
+              </div>
               <Modal.Footer>
                 <Button
                   type="submit"
@@ -144,6 +160,7 @@ ChannelForm.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
     private: PropTypes.bool,
+    starred: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,
