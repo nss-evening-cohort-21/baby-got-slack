@@ -33,7 +33,7 @@ body {
 
 .navbar {
   overflow: hidden;
-  background-color: #4A154B;
+  background-color: #340E36; 
   display: flex;
   position: fixed;
   top: 0;
@@ -75,6 +75,10 @@ body {
   align-items: center;
   justify-content: center;
   height: 60px;
+}
+
+#sidebar {
+  background-color: #4A154B;
 }
 
 .container {

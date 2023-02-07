@@ -39,13 +39,13 @@ function ChannelForm({ obj, onUpdate }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateChannel(formInput)
-        .then(() => router.push(`/channels/${obj.firebaseKey}`));
+        .then(() => router.push(`/channel/${obj.firebaseKey}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createChannel(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateChannel(patchPayload).then(() => {
-          router.push(`/channels/${obj.firebaseKey}`);
+          router.push(`/channel/${obj.firebaseKey}`);
           onUpdate();
           handleClose();
         });
