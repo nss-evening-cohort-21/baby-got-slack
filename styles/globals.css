@@ -51,6 +51,21 @@ body {
   left: 0;
   bottom: 0;
   width: 250px;
+  align-items: left;
+}
+
+.sidebar {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.brand-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 50px;
+  width: 100%;
+  padding: 10px;
 }
 
 .left-sidebar .nav-link:hover {

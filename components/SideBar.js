@@ -56,10 +56,9 @@ function Sidebar() {
           Baby Got Slack
         </Navbar.Brand>
       </div>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+      <div>
         <Nav className="flex-column">
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
             <div style={{ color: '#E2EAF3' }}>Channels
             </div>
           </div>
@@ -87,7 +86,7 @@ function Sidebar() {
             </Link>
           ))} */}
         </Nav>
-      </Navbar.Collapse>
+      </div>
     </Navbar>
   );
 }
