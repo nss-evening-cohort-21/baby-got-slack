@@ -8,21 +8,19 @@ import { useAuth } from '../utils/context/authContext';
 export default function NavBar() {
   const { user } = useAuth();
   return (
-    <Navbar collapseOnSelect expand="lg" bg="purple" variant="dark">
+    <Navbar bg="purple" variant="dark">
       <Container>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
+        <Nav className="me-auto">
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <SearchBar />
             <Link passHref href="/profile">
               <Navbar.Brand className="navbar-brand">
                 <Image src={user.photoURL} alt="userURL" width="40%" height="40%" />
               </Navbar.Brand>
             </Link>
-          </Nav>
-        </Navbar.Collapse>
+          </div>
+        </Nav>
       </Container>
     </Navbar>
-
   );
 }

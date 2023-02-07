@@ -52,6 +52,12 @@ body {
   left: 0;
   bottom: 0;
   width: 250px;
+  align-items: left;
+}
+
+.sidebar {
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .left-sidebar .nav-link:hover {
