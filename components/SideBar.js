@@ -40,16 +40,18 @@ function Sidebar() {
   // ChannelForm component inside the navbar
   // SideBar component exported as default export
   return (
-    <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg">
-      <div>
+    <Navbar
+      className="sidebar d-flex flex-column left-sidebar"
+      expand="lg"
+    >
+      <div className="brand-container">
         <Navbar.Brand href="/" style={{ fontSize: '20px', color: '#E2EAF3' }}>
           Baby Got Slack
         </Navbar.Brand>
       </div>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+      <div>
         <Nav className="flex-column">
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
             <div style={{ color: '#E2EAF3' }}>Channels
             </div>
           </div>
@@ -68,7 +70,7 @@ function Sidebar() {
           <ChannelForm onUpdate={getAllChannels} />
 
         </Nav>
-      </Navbar.Collapse>
+      </div>
     </Navbar>
   );
 }
