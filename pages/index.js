@@ -28,7 +28,7 @@ function MainPage() {
 
       <div id="message-container">
         {messages.map((message) => (
-          <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} />
+          <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} isMine={message.uid === user.uid} />
         ))}
       </div><MessageForm onUpdate={getAllTheMessages} />
     </div>
