@@ -60,6 +60,15 @@ body {
   max-height: 100vh;
 }
 
+.brand-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 50px;
+  width: 100%;
+  padding: 10px;
+}
+
 .left-sidebar .nav-link:hover {
   color: rgb(233, 142, 142); /* change this to the color you want */
 }
