@@ -14,9 +14,10 @@ const initialState = {
 
 export default function MessageForm({ obj, onUpdate }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [channels, setChannels] = useState([]);
+  const [, setChannels] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
+  const { firebaseKey } = router.query;
 
   const time = new Date().toLocaleString('en-US', {
     year: 'numeric',
@@ -46,7 +47,7 @@ export default function MessageForm({ obj, onUpdate }) {
         .then(() => router.push('/'));
     } else {
       const payload = {
-        ...formInput, uid: user.uid, timestamp: time, name: user.displayName,
+        ...formInput, uid: user.uid, timestamp: time, name: user.displayName, channel_id: firebaseKey,
       };
       createMessage(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
@@ -72,29 +73,6 @@ export default function MessageForm({ obj, onUpdate }) {
             />
           </FloatingLabel>
 
-          <FloatingLabel label="Channel" controlId="messageChannelId">
-            <Form.Select
-              aria-label="Channel Id"
-              name="channel_id"
-              onChange={handleChange}
-              className="mb-3"
-              value={obj.channel_id}
-              required
-            >
-              <option value="">Select A Channel</option>
-              {
-            channels.map((channel) => (
-              <option
-                key={channel.firebaseKey}
-                value={channel.firebaseKey}
-              >
-                {channel.name}
-              </option>
-            ))
-          }
-            </Form.Select>
-          </FloatingLabel>
-
           <Button variant="primary" type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Message
           </Button>
         </Stack>
@@ -106,7 +84,7 @@ export default function MessageForm({ obj, onUpdate }) {
 MessageForm.propTypes = {
   obj: PropTypes.shape({
     message: PropTypes.string,
-    channel_id: PropTypes.string,
+    // channel_id: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,

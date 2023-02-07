@@ -106,10 +106,8 @@ body {
 }
 
 #channel-header {
-  position: fixed;
-  width: 81%;
-  z-index: 1;
-  margin-bottom: 100px;
+  position: relative;
+  width: 100%;
 }
 
 #message-card {
