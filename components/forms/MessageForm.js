@@ -41,7 +41,6 @@ export default function MessageForm({ obj, onUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormInput(initialState);
     if (obj.firebaseKey) {
       updateMessage(formInput)
         .then(() => router.push('/'));
