@@ -6,11 +6,12 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
-import { createChannel, getSingleChannel, updateChannel } from '../../api/channelsData';
+import { getSingleChannel, updateChannel } from '../../api/channelsData';
 import { deleteChannelMessages } from '../../api/mergedData';
 
 const initialState = {
   name: '',
+  topic: '',
   description: '',
   starred: false,
   private: false,
@@ -55,16 +56,17 @@ function ChannelHeaderForm({ obj, onUpdate }) {
     if (obj.firebaseKey) {
       updateChannel(formInput)
         .then(() => router.push(`/channels/${obj.firebaseKey}`));
-    } else {
-      const payload = { ...formInput, uid: user.uid };
-      createChannel(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateChannel(patchPayload).then(() => {
-          onUpdate();
-          handleClose();
-        });
-      });
     }
+    // } else {
+    // const payload = { ...formInput, uid: user.uid };
+    // createChannel(payload).then(({ name }) => {
+    //   const patchPayload = { firebaseKey: name };
+    //   updateChannel(patchPayload).then(() => {
+    onUpdate();
+    handleClose();
+    //     });
+    //   });
+    // }
   };
 
   return (
@@ -106,6 +108,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
+                  style={{ width: '100%' }}
                   name="topic"
                   value={formInput.topic}
                   onChange={handleChange}
@@ -119,6 +122,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
+                  style={{ width: '100%' }}
                   name="description"
                   value={formInput.description}
                   onChange={handleChange}
@@ -164,7 +168,7 @@ function ChannelHeaderForm({ obj, onUpdate }) {
                 <Button
                   type="submit"
                 >
-                  Update
+                  {obj.firebaseKey ? 'Update' : 'Update'}
                 </Button>
                 <Button variant="danger" onClick={deleteThisChannel} className="m-2">
                   Delete
