@@ -45,6 +45,7 @@ function ChannelForm({ obj, onUpdate }) {
       createChannel(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateChannel(patchPayload).then(() => {
+          router.push(`/channels/${obj.firebaseKey}`);
           onUpdate();
           handleClose();
         });

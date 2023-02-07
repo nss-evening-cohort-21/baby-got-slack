@@ -110,10 +110,6 @@ body {
   z-index: 1;
 }
 
-/* #message-container {
-  margin-top: 75px;
-} */
-
-#message-form-card {
-  background-color: #F8F8F8;
+#message-card {
+  text-align: left;
 }

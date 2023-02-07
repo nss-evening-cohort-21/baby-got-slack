@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
 import { createChannel, updateChannel } from '../../api/channelsData';
+import { deleteChannelMessages } from '../../api/mergedData';
 
 const initialState = {
   name: '',
@@ -22,6 +23,12 @@ function ChannelHeaderForm({ obj, onUpdate }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
+
+  const deleteThisChannel = () => {
+    if (window.confirm(`Delete ${obj.name}`)) {
+      deleteChannelMessages(obj.firebaseKey).then(() => onUpdate());
+    }
+  };
 
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
@@ -85,17 +92,17 @@ function ChannelHeaderForm({ obj, onUpdate }) {
               <div className="w-full px-3">
                 <FloatingLabel
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  for="name"
+                  for="topic"
                 >
-                  Name
+                  Topic
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
-                  name="name"
-                  value={formInput.name}
+                  name="topic"
+                  value={formInput.topic}
                   onChange={handleChange}
                   type="text"
-                  placeholder="# e.g. plan-budget"
+                  placeholder="Add a topic"
                 />
               </div>
               <div className="w-full px-3">
@@ -129,10 +136,29 @@ function ChannelHeaderForm({ obj, onUpdate }) {
                   }}
                 />
               </div>
+              <div className="mb-4">
+                <Form.Check
+                  className="text-grey mb-3"
+                  type="switch"
+                  id="starred"
+                  name="starred"
+                  label="Move to starred"
+                  checked=""
+                  onChange={(e) => {
+                    setFormInput((prevState) => ({
+                      ...prevState,
+                      starred: e.target.checked,
+                    }));
+                  }}
+                />
+              </div>
               <Modal.Footer>
                 <Button
                   type="submit"
                 >{obj.firebaseKey ? 'Update' : 'Create'} Form
+                </Button>
+                <Button variant="danger" onClick={deleteThisChannel} className="m-2">
+                  Delete
                 </Button>
               </Modal.Footer>
             </form>
@@ -146,8 +172,10 @@ function ChannelHeaderForm({ obj, onUpdate }) {
 ChannelHeaderForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
+    topic: PropTypes.string,
     description: PropTypes.string,
     private: PropTypes.bool,
+    starred: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,
