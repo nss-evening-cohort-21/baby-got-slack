@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { deleteMessage } from '../api/messagesData';
 
-function MessageCard({ messageObj, onUpdate }) {
+function MessageCard({ messageObj, onUpdate, isMine }) {
   const deleteThisMessage = () => {
     if (window.confirm('Are you sure you want to delete this message?')) {
       deleteMessage(messageObj.firebaseKey).then(() => onUpdate());
@@ -17,10 +17,15 @@ function MessageCard({ messageObj, onUpdate }) {
         <Card.Title>{messageObj.name}</Card.Title>
         <Card.Subtitle>{messageObj.timestamp}</Card.Subtitle>
         <p className="card-text bold">{messageObj.message}</p>
-        <DropdownButton className="position-absolute top-0 end-0" id="dropdown-basic-button" title="" size="sm" variant="light">
-          <Dropdown.Item href={`/messages/edit/${messageObj.firebaseKey}`}>Edit</Dropdown.Item>
-          <Dropdown.Item onClick={deleteThisMessage}>Delete</Dropdown.Item>
-        </DropdownButton>
+
+        {isMine
+          ? (
+            <DropdownButton className="position-absolute top-0 end-0" id="dropdown-basic-button" title="" size="sm" variant="light">
+              <Dropdown.Item href={`/messages/edit/${messageObj.firebaseKey}`}>Edit</Dropdown.Item>
+              <Dropdown.Item onClick={deleteThisMessage}>Delete</Dropdown.Item>
+            </DropdownButton>
+          )
+          : ('')}
       </Card.Body>
     </Card>
   );
@@ -36,6 +41,7 @@ MessageCard.propTypes = {
     uid: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  isMine: PropTypes.bool.isRequired,
 };
 
 export default MessageCard;
