@@ -39,7 +39,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 }
 
 .navbar a {
@@ -105,9 +105,8 @@ body {
 }
 
 #channel-header {
-  position: fixed;
-  width: 81%;
-  z-index: 1;
+  position: relative;
+  width: 100%;
 }
 
 #message-card {
