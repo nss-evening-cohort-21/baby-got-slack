@@ -44,7 +44,7 @@ export default function MessageForm({ obj, onUpdate }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateMessage(formInput)
-        .then(() => router.push(`/channel/${firebaseKey}`));
+        .then(() => router.push('/'));
     } else {
       const payload = {
         ...formInput, uid: user.uid, timestamp: time, name: user.displayName, channel_id: firebaseKey,
@@ -53,6 +53,7 @@ export default function MessageForm({ obj, onUpdate }) {
         const patchPayload = { firebaseKey: name };
         updateMessage(patchPayload).then(() => {
           onUpdate();
+          setFormInput(initialState);
         });
       });
     }
@@ -62,7 +63,7 @@ export default function MessageForm({ obj, onUpdate }) {
     <footer id="footer">
       <Form onSubmit={handleSubmit}>
         <Stack direction="horizontal" gap={3}>
-          <FloatingLabel className="mb-3" label="Message" controlId="message">
+          <FloatingLabel style={{ width: '70%' }} className="mb-3" label="Message" controlId="message">
             <Form.Control
               type="text"
               placeholder="Write Your Message"
