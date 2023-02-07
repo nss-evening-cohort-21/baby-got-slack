@@ -12,6 +12,7 @@ import { deleteChannelMessages } from '../../api/mergedData';
 const initialState = {
   name: '',
   description: '',
+  starred: false,
   private: false,
 };
 

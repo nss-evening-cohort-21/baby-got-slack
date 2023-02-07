@@ -40,6 +40,7 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
+  margin-bottom: 100px;
 }
 
 .navbar a {
@@ -108,6 +109,7 @@ body {
   position: fixed;
   width: 81%;
   z-index: 1;
+  margin-bottom: 100px;
 }
 
 #message-card {
