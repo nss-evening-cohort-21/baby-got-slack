@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import ChannelHeaderForm from './forms/ChannelHeaderForm';
 import { getSingleChannel } from '../api/channelsData';
-// import { useAuth } from '../utils/context/authContext';
+import { useAuth } from '../utils/context/authContext';
 
 function ChannelHeader() {
   const [channelName, setChannelName] = useState({ name: '' });
   const router = useRouter();
   const { firebaseKey } = router.query;
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   const getChannelDetails = () => {
     getSingleChannel(firebaseKey).then(setChannelName);
@@ -17,7 +17,7 @@ function ChannelHeader() {
 
   useEffect(() => {
     getChannelDetails();
-  }, []);
+  }, [channelName, user]);
 
   return (
     <div id="channel-header">
