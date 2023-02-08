@@ -7,7 +7,6 @@ import { viewChannelMessages } from '../../api/mergedData';
 import { useAuth } from '../../utils/context/authContext';
 
 function ViewChannel() {
-  // const [messages, setMessages] = useState([]);
   const router = useRouter();
   const [channelDetails, setChannelDetails] = useState({});
   const { user } = useAuth();
@@ -20,7 +19,6 @@ function ViewChannel() {
 
   useEffect(() => {
     viewChannelMessages(firebaseKey).then(setChannelDetails);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firebaseKey]);
 
   return (

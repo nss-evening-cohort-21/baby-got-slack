@@ -2,6 +2,7 @@
   "-NN9YzHrPJhiHpGMPCWp": {
     "firebaseKey": "-NN9YzHrPJhiHpGMPCWp",
     "name": "Superchat",
+    "topic": "Superchat",
     "description": "This is the channel for Product Management.",
     "starred": true,
     "uid": ""
@@ -9,6 +10,7 @@
   "-NN9YzHtBEiqVez1GruP": {
     "firebaseKey": "-NN9YzHtBEiqVez1GruP",
     "name": "Lab Discussion",
+    "topic": "Labs",
     "description": "This channel will be used for all Lab Discussions between students and teachers.",
     "starred": true,
     "uid": ""
@@ -16,6 +18,7 @@
   "-NN9YzHvddDAdgVK2xwh": {
     "firebaseKey": "-NN9YzHvddDAdgVK2xwh",
     "name": "Main Classroom",
+    "topic": "Home room",
     "description": "This is the Main Classroom Channel for all students in E21.",
     "starred": true,
     "uid": ""

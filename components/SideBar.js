@@ -1,10 +1,7 @@
-import Link from 'next/link';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Nav, Navbar } from 'react-bootstrap';
-// import { useRouter } from 'next/router';
 import { getChannels } from '../api/channelsData';
-// import { getDummyMembers } from '../api/dummyMembersData';
 import ChannelForm from './forms/ChannelForm';
 
 function Sidebar() {
@@ -32,10 +29,6 @@ function Sidebar() {
   const getAllChannels = () => {
     getChannels().then(setChannels); // calls getChannels function, sets returned result to channels state variable
   };
-
-  // const getAllDummyMembers = () => {
-  //   getDummyMembers(firebaseKey).then(setMembers);
-  // };
 
   useEffect(() => {
     getAllChannels();
@@ -74,17 +67,8 @@ function Sidebar() {
           passHref prop set to true to pass href prop to DOM element
           href prop is /channel/{channel.firebaseKey} */}
 
-          <ChannelForm onUpdate={getAllChannels} />
+          <ChannelForm onUpdate={getAllChannels} buttonTitle="Add channels" />
 
-          {/* <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ color: '#E2EAF3', marginTop: '15px' }}>Direct messages
-            </div>
-          </div>
-          {members.map((member) => (
-            <Link key={member.firebaseKey} passHref href={`/member/${member.firebaseKey}`}>
-              <Nav.Link># {member.name}</Nav.Link>
-            </Link>
-          ))} */}
         </Nav>
       </div>
     </Navbar>
