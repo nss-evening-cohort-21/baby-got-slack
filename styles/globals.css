@@ -76,15 +76,6 @@ body {
   color: rgb(233, 142, 142); /* change this to the color you want */
 }
 
-.sidebar-dropdown {
-  position: relative;
-  top: -10px;
-}
-
-.navbar .dropdown-menu {
-  background-color: #959CA4;
-}
-
 .brand {
   display: flex;
   align-items: center;
