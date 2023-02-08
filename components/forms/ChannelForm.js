@@ -10,22 +10,27 @@ import { createChannel, updateChannel } from '../../api/channelsData';
 
 const initialState = {
   name: '',
+  topic: '',
   description: '',
   private: false,
+  starred: false,
 };
 
-function ChannelForm({ obj, onUpdate }) {
+function ChannelForm({ obj, onUpdate, buttonTitle }) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const [formInput, setFormInput] = useState(initialState);
+  const handleClose = () => {
+    setShow(false);
+    setFormInput(obj);
+  };
   const handleShow = () => setShow(true);
 
-  const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+  }, [obj.firebaseKey, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,13 +44,16 @@ function ChannelForm({ obj, onUpdate }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updateChannel(formInput)
-        .then(() => router.push(`/channel/${obj.firebaseKey}`));
+        .then(() => {
+          onUpdate();
+          handleClose();
+        });
     } else {
       const payload = { ...formInput, uid: user.uid };
       createChannel(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateChannel(patchPayload).then(() => {
-          router.push(`/channel/${obj.firebaseKey}`);
+          router.push(`/channel/${name}`);
           onUpdate();
           handleClose();
         });
@@ -60,7 +68,7 @@ function ChannelForm({ obj, onUpdate }) {
         style={{
           backgroundColor: '#4A154B', fontSize: '15px', color: '#E2EAF3', borderColor: '#4A154B',
         }}
-      >+ Add channels
+      >{buttonTitle}
       </Button>
 
       <Modal
@@ -87,6 +95,7 @@ function ChannelForm({ obj, onUpdate }) {
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
+                  style={{ width: '100%', marginBottom: '15px' }}
                   name="name"
                   value={formInput.name}
                   onChange={handleChange}
@@ -95,11 +104,27 @@ function ChannelForm({ obj, onUpdate }) {
                 />
               </div>
               <div className="w-full px-3">
+                <FloatingLabel className="block text-gray-700 text-sm font-bold mb-2" for="topic">
+                  Topic
+                </FloatingLabel>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
+                  style={{ width: '100%', marginBottom: '15px' }}
+                  name="topic"
+                  value={formInput.topic}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder=""
+                />
+              </div>
+
+              <div className="w-full px-3">
                 <FloatingLabel className="block text-gray-700 text-sm font-bold mb-2" for="description">
                   Description (optional)
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
+                  style={{ width: '100%', marginBottom: '15px' }}
                   name="description"
                   value={formInput.description}
                   onChange={handleChange}
@@ -116,7 +141,7 @@ function ChannelForm({ obj, onUpdate }) {
                   id="private"
                   name="private"
                   label="Make private"
-                  checked=""
+                  checked={formInput.private}
                   onChange={(e) => {
                     setFormInput((prevState) => ({
                       ...prevState,
@@ -132,7 +157,7 @@ function ChannelForm({ obj, onUpdate }) {
                   id="starred"
                   name="starred"
                   label="Star"
-                  checked=""
+                  checked={formInput.starred}
                   onChange={(e) => {
                     setFormInput((prevState) => ({
                       ...prevState,
@@ -158,12 +183,14 @@ function ChannelForm({ obj, onUpdate }) {
 ChannelForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
+    topic: PropTypes.string,
     description: PropTypes.string,
     private: PropTypes.bool,
     starred: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,
+  buttonTitle: PropTypes.string.isRequired,
 };
 
 ChannelForm.defaultProps = {
