@@ -50,7 +50,7 @@ function Sidebar() {
         </Navbar.Brand>
       </div>
       <div>
-        <Nav className="flex-column">
+        <Nav className="flex-column channel-names">
           <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
             <div style={{ color: '#E2EAF3' }}>Channels
             </div>
@@ -67,7 +67,7 @@ function Sidebar() {
           passHref prop set to true to pass href prop to DOM element
           href prop is /channel/{channel.firebaseKey} */}
 
-          <ChannelForm onUpdate={getAllChannels} buttonTitle="Add Channels" />
+          <ChannelForm onUpdate={getAllChannels} buttonTitle="➕ Add Channel" />
 
         </Nav>
       </div>

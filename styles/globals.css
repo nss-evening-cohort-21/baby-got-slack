@@ -55,6 +55,12 @@ body {
   align-items: left;
 }
 
+.channel-names {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .sidebar {
   overflow-y: auto;
   max-height: 100vh;
@@ -110,8 +116,7 @@ body {
 #form {
   max-width: 64em;
   margin: auto;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 15px;
   text-align: center;
 }
 
