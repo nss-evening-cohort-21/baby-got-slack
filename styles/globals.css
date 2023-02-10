@@ -21,6 +21,7 @@ body {
   background-color: #F8F8F8;
   padding-top: 50px;
   margin-bottom: 75px;
+  overflow-x: hidden;
 }
 
 #message-card {
