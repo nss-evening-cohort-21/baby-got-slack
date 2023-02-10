@@ -50,7 +50,7 @@ function Sidebar() {
         </Navbar.Brand>
       </div>
       <div>
-        <Nav className="flex-column">
+        <Nav className="flex-column channel-names">
           <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
             <div style={{ color: '#E2EAF3' }}>Channels <ChannelForm buttonTitle="+" />
             </div>
