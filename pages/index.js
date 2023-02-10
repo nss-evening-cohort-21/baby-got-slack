@@ -11,7 +11,7 @@ function MainPage() {
   const { user } = useAuth();
 
   const getAllTheMessages = () => {
-    getMessages(user.uid).then(setMessages);
+    getMessages().then(setMessages);
   };
 
   useEffect(() => {

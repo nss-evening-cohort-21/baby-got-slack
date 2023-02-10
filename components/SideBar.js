@@ -67,7 +67,7 @@ function Sidebar() {
           passHref prop set to true to pass href prop to DOM element
           href prop is /channel/{channel.firebaseKey} */}
 
-          <ChannelForm onUpdate={getAllChannels} buttonTitle="Add channels" />
+          <ChannelForm onUpdate={getAllChannels} buttonTitle="Add Channels" />
 
         </Nav>
       </div>
