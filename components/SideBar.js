@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Nav, Navbar } from 'react-bootstrap';
+// import { useRouter } from 'next/router';
 import { getChannels } from '../api/channelsData';
 import ChannelForm from './forms/ChannelForm';
+import { getDummyMembers } from '../api/dummyMembersData';
 
 function Sidebar() {
   const [channels, setChannels] = useState([]); // creating 2 state variables channels is an empty array
-  // const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState([]);
   // const router = useRouter();
   // const { firebaseKey } = router.query;
 
@@ -30,9 +32,13 @@ function Sidebar() {
     getChannels().then(setChannels); // calls getChannels function, sets returned result to channels state variable
   };
 
+  const getAllDummyMembers = () => {
+    getDummyMembers().then(setMembers);
+  };
+
   useEffect(() => {
     getAllChannels();
-    // getAllDummyMembers(); // calls getAllChannels function whenever channels state variable changes, if there is no change there will be no re-render
+    getAllDummyMembers(); // calls getAllChannels function whenever channels state variable changes, if there is no change there will be no re-render
   }, [channels]); // useEffect depends the values of state variable channels, dependency array helps to avoid unnecessary re-renders
   // retrieves an updated list of channels whenever the state variable changes
 
@@ -68,6 +74,16 @@ function Sidebar() {
           href prop is /channel/{channel.firebaseKey} */}
 
           <ChannelForm onUpdate={getAllChannels} buttonTitle="Add Channels" />
+
+          <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
+            <div style={{ color: '#E2EAF3' }}>Direct messages
+            </div>
+          </div>
+          {members.map((member) => (
+            <Link key={member.firebaseKey} passHref href={`/channel/${member.firebaseKey}`}>
+              <Nav.Link># {member.name}</Nav.Link>
+            </Link>
+          ))}
 
         </Nav>
       </div>
