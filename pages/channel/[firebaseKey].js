@@ -10,7 +10,6 @@ function ViewChannel() {
   const router = useRouter();
   const [channelDetails, setChannelDetails] = useState({});
   const { user } = useAuth();
-
   const { firebaseKey } = router.query;
 
   const getAllTheMessages = () => {

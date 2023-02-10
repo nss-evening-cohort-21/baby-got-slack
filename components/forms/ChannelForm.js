@@ -16,7 +16,9 @@ const initialState = {
   starred: false,
 };
 
-function ChannelForm({ obj, onUpdate, buttonTitle }) {
+function ChannelForm({
+  obj, onUpdate, buttonTitle,
+}) {
   const [show, setShow] = useState(false);
   const [formInput, setFormInput] = useState(initialState);
   const handleClose = () => {
@@ -66,7 +68,11 @@ function ChannelForm({ obj, onUpdate, buttonTitle }) {
       <Button
         onClick={handleShow}
         style={{
-          backgroundColor: '#4A154B', fontSize: '15px', color: '#E2EAF3', borderColor: '#4A154B',
+          width: '50px',
+          fontSize: '6px',
+          borderColor: 'transparent',
+          backgroundColor: 'transparent',
+          color: '#5A5A5A',
         }}
       >{buttonTitle}
       </Button>
