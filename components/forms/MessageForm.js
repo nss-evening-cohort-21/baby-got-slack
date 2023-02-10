@@ -69,7 +69,7 @@ export default function MessageForm({ obj, onUpdate }) {
         }}
       >
         <Stack direction="horizontal" gap={3}>
-          <FloatingLabel id="messageBox" style={{ width: '70%', border: 'none' }} className="mb-3" label="Message" controlId="message">
+          <FloatingLabel id="messageBox" style={{ width: '900%', border: 'none' }} className="mb-3" label="Message" controlId="message">
             <Form.Control
               type="text"
               placeholder="Write Your Message"

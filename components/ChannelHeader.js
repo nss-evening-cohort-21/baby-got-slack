@@ -31,7 +31,7 @@ function ChannelHeader() {
         <div className="card-body" style={{ display: 'flex', flex: 'flex-wrap' }}>
           <h5 className="card-title"># {channelObject?.name}</h5>
           <ChannelForm buttonTitle="╲╱" obj={channelObject} onUpdate={getChannelDetails} />
-          <Button onClick={deleteThisChannel}> Delete </Button>
+          <Button className="position-absolute top-0 end-0" style={{ backgroundColor: 'transparent', borderColor: 'transparent' }} onClick={deleteThisChannel}> 🗑️ </Button>
         </div>
       </div>
     </div>
