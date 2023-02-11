@@ -1,6 +1,6 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Nav, Navbar } from 'react-bootstrap';
 // import { useRouter } from 'next/router';
 import { Nav, Navbar, Image } from 'react-bootstrap';
 import { getChannels } from '../api/channelsData';
