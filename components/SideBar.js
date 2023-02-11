@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Nav, Navbar, Image } from 'react-bootstrap';
+// import StarredChannels from '../pages/channel/starred';
 import { getChannels } from '../api/channelsData';
 import ChannelForm from './forms/ChannelForm';
 import { getDummyMembers } from '../api/dummyMembersData';
@@ -58,7 +59,7 @@ function Sidebar() {
         <Nav className="flex-column channel-names">
           <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
 
-            <div style={{ color: '#E2EAF3', fontSize: '30px' }}>Channels <ChannelForm buttonTitle="+" width="200%" />
+            <div style={{ color: '#E2EAF3', fontSize: '22px' }}>Channels <ChannelForm buttonTitle="+" width="200%" />
             </div>
           </div>
           {channels.map((channel) => (
@@ -66,6 +67,12 @@ function Sidebar() {
               <Nav.Link># {channel.name}</Nav.Link>
             </Link>
           ))}
+          {/* <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
+
+            <div style={{ color: '#E2EAF3', fontSize: '22px' }}>Starred
+            </div>
+            <StarredChannels />
+          </div> */}
 
           {/* using map method to iterate over array of channels
           Link component returned for each channel in the array
@@ -76,7 +83,7 @@ function Sidebar() {
           <ChannelForm onUpdate={getAllChannels} buttonTitle="+ Add Channels" />
 
           <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
-            <div style={{ color: '#E2EAF3' }}>Direct messages
+            <div style={{ color: '#E2EAF3', fontSize: '22px' }}>Direct messages
             </div>
           </div>
           {members.map((member) => (
