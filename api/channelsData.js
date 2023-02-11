@@ -79,7 +79,7 @@ const starredChannels = (uid) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const starChannel = Object.values(data).filter((item) => item.starred);
+      const starChannel = Object.values(data).filter((chan) => chan.starred);
       resolve(starChannel);
     })
     .catch(reject);
