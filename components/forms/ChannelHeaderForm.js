@@ -6,33 +6,41 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
-import { createChannel, updateChannel } from '../../api/channelsData';
+import { updateChannel, getSingleChannel } from '../../api/channelsData';
+import { deleteChannelMessages } from '../../api/mergedData';
 
 const initialState = {
   name: '',
   topic: '',
   description: '',
-  private: false,
   starred: false,
+  private: false,
 };
 
-function ChannelForm({
-  obj, onUpdate, buttonTitle,
-}) {
+function ChannelHeaderForm({ obj, onUpdate }) {
   const [show, setShow] = useState(false);
-  const [formInput, setFormInput] = useState(initialState);
-  const handleClose = () => {
-    setShow(false);
-    setFormInput(obj);
-  };
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
+  const { firebaseKey } = router.query;
+
+  const deleteThisChannel = () => {
+    if (window.confirm(`Delete ${obj.name}`)) {
+      deleteChannelMessages(obj.firebaseKey).then(() => onUpdate());
+    }
+  };
+
+  const getChannelDeets = () => {
+    getSingleChannel(firebaseKey).then(setFormInput);
+  };
 
   useEffect(() => {
+    getChannelDeets();
     if (obj.firebaseKey) setFormInput(obj);
-  }, [obj.firebaseKey, user]);
+  }, [formInput, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,21 +54,18 @@ function ChannelForm({
     e.preventDefault();
     if (obj.firebaseKey) {
       updateChannel(formInput)
-        .then(() => {
-          onUpdate();
-          handleClose();
-        });
-    } else {
-      const payload = { ...formInput, uid: user.uid };
-      createChannel(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
-        updateChannel(patchPayload).then(() => {
-          router.push(`/channel/${name}`);
-          onUpdate();
-          handleClose();
-        });
-      });
+        .then(() => router.push(`/channel/${obj.firebaseKey}`));
     }
+    // } else {
+    // const payload = { ...formInput, uid: user.uid };
+    // createChannel(payload).then(({ name }) => {
+    //   const patchPayload = { firebaseKey: name };
+    //   updateChannel(patchPayload).then(() => {
+    onUpdate();
+    handleClose();
+    //     });
+    //   });
+    // }
   };
 
   return (
@@ -68,15 +73,14 @@ function ChannelForm({
       <Button
         onClick={handleShow}
         style={{
-          width: '150px',
-          fontSize: '14px',
+          width: '50px',
+          fontSize: '6px',
+          marginLeft: '20px',
           borderColor: 'transparent',
           backgroundColor: 'transparent',
-          color: '#D3D3D3',
-          textAlign: 'left',
-          paddingLeft: '10px',
+          color: '#5A5A5A',
         }}
-      >{buttonTitle}
+      >╲╱
       </Button>
 
       <Modal
@@ -86,7 +90,7 @@ function ChannelForm({
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{obj.firebaseKey ? 'Update' : 'Create'} Channel</Modal.Title>
+          <Modal.Title>Channel Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mb-4 text-gray-700">Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.
@@ -97,42 +101,27 @@ function ChannelForm({
               <div className="w-full px-3">
                 <FloatingLabel
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  for="name"
+                  for="topic"
                 >
-                  Name
-                </FloatingLabel>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
-                  style={{ width: '100%', marginBottom: '15px' }}
-                  name="name"
-                  value={formInput.name}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="# e.g. plan-budget"
-                />
-              </div>
-              <div className="w-full px-3">
-                <FloatingLabel className="block text-gray-700 text-sm font-bold mb-2" for="topic">
                   Topic
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
-                  style={{ width: '100%', marginBottom: '15px' }}
+                  style={{ width: '100%' }}
                   name="topic"
                   value={formInput.topic}
                   onChange={handleChange}
                   type="text"
-                  placeholder=""
+                  placeholder="Add a topic"
                 />
               </div>
-
               <div className="w-full px-3">
                 <FloatingLabel className="block text-gray-700 text-sm font-bold mb-2" for="description">
                   Description (optional)
                 </FloatingLabel>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full max-w-xs"
-                  style={{ width: '100%', marginBottom: '15px' }}
+                  style={{ width: '100%' }}
                   name="description"
                   value={formInput.description}
                   onChange={handleChange}
@@ -164,7 +153,7 @@ function ChannelForm({
                   type="switch"
                   id="starred"
                   name="starred"
-                  label="Star"
+                  label="Move to starred"
                   checked={formInput.starred}
                   onChange={(e) => {
                     setFormInput((prevState) => ({
@@ -177,8 +166,11 @@ function ChannelForm({
               <Modal.Footer>
                 <Button
                   type="submit"
-                  id="create-channel"
-                >{obj.firebaseKey ? 'Update' : 'Create'} Channel
+                >
+                  {obj.firebaseKey ? 'Update' : 'Update'}
+                </Button>
+                <Button variant="danger" onClick={deleteThisChannel} className="m-2">
+                  Delete
                 </Button>
               </Modal.Footer>
             </form>
@@ -189,7 +181,7 @@ function ChannelForm({
   );
 }
 
-ChannelForm.propTypes = {
+ChannelHeaderForm.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
     topic: PropTypes.string,
@@ -199,12 +191,11 @@ ChannelForm.propTypes = {
     firebaseKey: PropTypes.string,
   }),
   onUpdate: PropTypes.func,
-  buttonTitle: PropTypes.string.isRequired,
 };
 
-ChannelForm.defaultProps = {
+ChannelHeaderForm.defaultProps = {
   obj: initialState,
   onUpdate: () => {},
 };
 
-export default ChannelForm;
+export default ChannelHeaderForm;
