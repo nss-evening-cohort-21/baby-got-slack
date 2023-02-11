@@ -68,11 +68,13 @@ function ChannelForm({
       <Button
         onClick={handleShow}
         style={{
-          width: '50px',
-          fontSize: '12px',
+          width: '150px',
+          fontSize: '14px',
           borderColor: 'transparent',
           backgroundColor: 'transparent',
-          color: '#5A5A5A',
+          color: '#D3D3D3',
+          textAlign: 'left',
+          paddingLeft: '10px',
         }}
       >{buttonTitle}
       </Button>
@@ -175,7 +177,8 @@ function ChannelForm({
               <Modal.Footer>
                 <Button
                   type="submit"
-                >{obj.firebaseKey ? 'Update' : 'Create'} Form
+                  id="create-channel"
+                >{obj.firebaseKey ? 'Update' : 'Create'} Channel
                 </Button>
               </Modal.Footer>
             </form>

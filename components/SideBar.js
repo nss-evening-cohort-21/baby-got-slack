@@ -49,7 +49,7 @@ function Sidebar() {
   // ChannelForm component inside the navbar
   // SideBar component exported as default export
   return (
-    <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg" id="sidebar">
+    <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg" id="sidebar" style={{ paddingLeft: '20px' }}>
       <div>
         <Navbar.Brand href="/" style={{ fontSize: '20px', color: '#FFFFFF', fontWeight: 'bold' }}>
           Baby Got Slack
@@ -73,7 +73,7 @@ function Sidebar() {
           passHref prop set to true to pass href prop to DOM element
           href prop is /channel/{channel.firebaseKey} */}
 
-          <ChannelForm onUpdate={getAllChannels} buttonTitle="Add Channels" />
+          <ChannelForm onUpdate={getAllChannels} buttonTitle="+ Add Channels" />
 
           <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center' }}>
             <div style={{ color: '#E2EAF3' }}>Direct messages
