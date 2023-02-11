@@ -124,3 +124,7 @@ body {
 #message-card {
   text-align: left;
 }
+
+#message-body {
+  display: flex;
+}
