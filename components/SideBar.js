@@ -1,7 +1,5 @@
-/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-// import { useRouter } from 'next/router';
 import { Nav, Navbar, Image } from 'react-bootstrap';
 import { getChannels } from '../api/channelsData';
 import ChannelForm from './forms/ChannelForm';
@@ -10,8 +8,6 @@ import { getDummyMembers } from '../api/dummyMembersData';
 function Sidebar() {
   const [channels, setChannels] = useState([]); // creating 2 state variables channels is an empty array
   const [members, setMembers] = useState([]);
-  // const router = useRouter();
-  // const { firebaseKey } = router.query;
 
   // state variables used in React components to store data that affects components' behavior/render
   // channels and showForm manage data and state of component
@@ -50,7 +46,7 @@ function Sidebar() {
   // ChannelForm component inside the navbar
   // SideBar component exported as default export
   return (
-    <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg" id="sidebar" style={{ paddingLeft: '20px' }}>
+    <Navbar className="sidebar d-flex flex-column left-sidebar" expand="lg" id="sidebar" style={{ paddingLeft: '30px' }}>
       <div>
         <Navbar.Brand href="/" style={{ fontSize: '30px', color: '#FFFFFF', fontWeight: 'bold' }}>
           &nbsp; BABY GOT &nbsp;
