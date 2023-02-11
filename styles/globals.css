@@ -110,13 +110,11 @@ body {
   position: fixed;
   bottom: 0;
   background-color: lightgray;
-  border-radius: 25px;
 }
 
 #form {
   max-width: 64em;
   margin: auto;
-  padding-top: 15px;
   text-align: center;
 }
 
