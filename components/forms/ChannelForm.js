@@ -86,7 +86,7 @@ function ChannelForm({
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Create a Channel</Modal.Title>
+          <Modal.Title>{obj.firebaseKey ? 'Update' : 'Create'} Channel</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mb-4 text-gray-700">Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.
