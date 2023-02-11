@@ -80,7 +80,7 @@ function Sidebar() {
             </div>
           </div>
           {members.map((member) => (
-            <Link key={member.firebaseKey} passHref href={`/channel/${member.firebaseKey}`}>
+            <Link key={member.firebaseKey} passHref href={`/members/${member.firebaseKey}`}>
               <Nav.Link># {member.name}</Nav.Link>
             </Link>
           ))}
