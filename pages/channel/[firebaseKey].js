@@ -10,6 +10,7 @@ import { useAuth } from '../../utils/context/authContext';
 function ViewChannel() {
   const router = useRouter();
   const [channelDetails, setChannelDetails] = useState({});
+  const [sortedMessages, setSortedMessages] = useState([]);
   const { user } = useAuth();
   const { firebaseKey } = router.query;
 
@@ -20,6 +21,14 @@ function ViewChannel() {
   useEffect(() => {
     viewChannelMessages(firebaseKey).then(setChannelDetails);
   }, [firebaseKey]);
+
+  useEffect(() => {
+    if (channelDetails?.messages) {
+      const sorted = [...channelDetails.messages].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+      setSortedMessages(sorted);
+      console.warn(sorted);
+    }
+  }, [channelDetails]);
 
   return (
 
@@ -33,9 +42,8 @@ function ViewChannel() {
         </div>
 
         <div id="message-container">
-          {channelDetails.messages
-            ?.map((message) => ({ ...message, unixTimestamp: new Date(message.timestamp).getTime() }))
-            .sort((a, b) => b.unixTimestamp - a.unixTimestamp)
+          {sortedMessages
+            .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
             .map((message) => (
               <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} isMine={message.uid === user.uid} />
             ))}
