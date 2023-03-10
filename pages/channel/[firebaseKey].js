@@ -33,9 +33,12 @@ function ViewChannel() {
         </div>
 
         <div id="message-container">
-          {channelDetails.messages?.map((message) => (
-            <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} isMine={message.uid === user.uid} />
-          ))}
+          {channelDetails.messages
+            ?.map((message) => ({ ...message, unixTimestamp: new Date(message.timestamp).getTime() }))
+            .sort((a, b) => b.unixTimestamp - a.unixTimestamp)
+            .map((message) => (
+              <MessageCard key={message.firebaseKey} messageObj={message} onUpdate={getAllTheMessages} isMine={message.uid === user.uid} />
+            ))}
         </div>
 
         <div style={{
