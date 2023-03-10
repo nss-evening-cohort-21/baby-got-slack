@@ -23,6 +23,7 @@ function ChannelHeader() {
 
   useEffect(() => {
     getChannelDetails();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firebaseKey, user]);
 
   return (
