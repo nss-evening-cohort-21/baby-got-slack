@@ -20,13 +20,7 @@ export default function MessageForm({ obj, onUpdate }) {
   const router = useRouter();
   const { firebaseKey } = router.query;
 
-  const time = new Date().toLocaleString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: 'numeric',
-    minute: '2-digit',
-  });
+  const time = new Date();
 
   useEffect(() => {
     getChannels().then(setChannels);

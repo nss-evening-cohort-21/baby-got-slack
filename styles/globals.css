@@ -128,3 +128,8 @@ body {
 #message-body {
   display: flex;
 }
+
+.flip {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+}

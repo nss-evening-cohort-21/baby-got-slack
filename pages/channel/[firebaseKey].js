@@ -24,9 +24,8 @@ function ViewChannel() {
 
   useEffect(() => {
     if (channelDetails?.messages) {
-      const sorted = [...channelDetails.messages].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+      const sorted = [...channelDetails.messages].sort((a, b) => b.timestamp - a.timestamp);
       setSortedMessages(sorted);
-      console.warn(sorted);
     }
   }, [channelDetails]);
 
@@ -41,7 +40,7 @@ function ViewChannel() {
           <ChannelHeader />
         </div>
 
-        <div id="message-container">
+        <div id="message-container" className="flip">
           {sortedMessages
             .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
             .map((message) => (
